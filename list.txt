@@ -1,0 +1,9 @@
+.vim
+.vimrc
+.bashrc
+.bash_profile
+.inputrc
+.hushlogin
+.tmux.conf
+.bash_sessions_disable
+.tools
