@@ -90,6 +90,7 @@ let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
+let g:syntastic_html_tidy_exec = 'tidy'
 
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
@@ -107,6 +108,10 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" Duplicate line with <C-d>
+nnoremap <C-d> yyp
+inoremap <C-d> <Esc>yypi
+vnoremap <C-d> yP
 
 " Shift tab removes indent
 inoremap <S-Tab> <C-d>
@@ -247,7 +252,7 @@ autocmd FileType tex nnoremap <F5> :w <Enter>:silent exec "!pdflatex<space><c-r>
 
 " Document Setup
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 autocmd FileType tex inoremap ,up \usepackage{}<Esc>i
 
 " Structure
