@@ -11,9 +11,6 @@
 " SNIPPETS  240
 
 
-execute pathogen#infect()
-execute pathogen#helptags()
-
 "            __  _
 " ___  ___  / /_(_)__  ___  ___
 "/ _ \/ _ \/ __/ / _ \/ _ \(_-<
