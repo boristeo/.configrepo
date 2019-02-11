@@ -55,6 +55,25 @@ set cinoptions=:0,l1
 set foldmethod=syntax
 set foldlevelstart=10
 
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+    let eline = getline(v:foldend)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+    let eline = substitute(eline, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+	let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
 " Wrapping
 set nowrap
 set formatoptions-=tc
@@ -76,6 +95,8 @@ hi MatchParen cterm=NONE ctermbg=NONE ctermfg=lightblue
 hi ColorColumn ctermbg=darkgrey guibg=darkgrey
 hi LineNr ctermfg=darkgrey
 hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE
+hi Folded ctermbg=darkgrey
+hi Folded ctermfg=white
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -204,6 +225,8 @@ map <leader><Tab> <Esc>/<++><Enter>"_c4l
 " For normal mode when in terminals (in X I have caps mapped to esc, this replaces it when I don't have X)
 inoremap jw <Esc>
 inoremap wj <Esc>
+
+nnoremap gf <c-w>gf
 
 "            __                    __
 " ___ ___ __/ /____  ______ _  ___/ /
@@ -356,10 +379,12 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 """.c
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
-autocmd FileType c,cpp noremap <F5> :call CurtineIncSw()<CR>
+autocmd FileType c,cpp noremap <F5> :w<CR>:call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
 autocmd FileType c,cpp nnoremap <c-k><c-d> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
+autocmd FileType c,cpp imap <c-space> <c-x><c-u>
+autocmd FileType c,cpp imap <c-@> <c-space>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
