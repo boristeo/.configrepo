@@ -25,6 +25,7 @@ set termencoding=utf-8
 set ttyfast
 set lazyredraw
 syntax on
+set autoread
 
 " Enable override from working dir
 set exrc
@@ -42,7 +43,7 @@ set statusline+=%*
 " Indentation
 set tabstop=4
 set softtabstop=4
-set expandtab
+set autoindent
 set shiftwidth=4
 set smarttab
 filetype indent on
@@ -51,7 +52,8 @@ filetype indent on
 set cinoptions=:0,l1
 
 " Folding
-"set foldmethod=syntax
+set foldmethod=syntax
+set foldlevelstart=10
 
 " Wrapping
 set nowrap
@@ -81,14 +83,14 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_c_check_header = 1
-let g:syntastic_cpp_compiler = "gcc"
+let g:syntastic_c_compiler = "clang"
 let g:syntastic_c_compiler_options = "-std=c99 -pedantic"
 let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
 let g:syntastic_html_tidy_exec = 'tidy'
-
+let g:clang_library_path = "/usr/lib/llvm-6.0/lib"
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
 " /  ' \/ _ `/ _ \/ _ \/ / _ \/ _ `(_-<
@@ -121,7 +123,7 @@ inoremap <S-Tab> <C-d>
 
 " Plugin toggles
 nmap <leader>1 :NERDTreeToggle<CR>
-nmap <leader>8 :TagbarToggle<CR>
+nmap <leader>7 :TagbarToggle<CR>
 
 " Open file as suckless sent presentation
 map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
@@ -187,9 +189,12 @@ so ~/.vim/luke/prose.vim
 nm <F8> :call ToggleProse()<CR>
 
 " C-T for new tab
-nnoremap <C-t> :tabnew<cr>
+nnoremap <c-n><c-t> :w<CR>:tabnew<CR>
 nnoremap L gt
 nnoremap H gT
+
+" NTree opens in new tabs
+let NERDTreeMapOpenInTab='<ENTER>'
 
 " Navigating with guides
 inoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
@@ -210,7 +215,8 @@ autocmd FileType make set noexpandtab
 
 " Filetype resolution
 autocmd BufRead,BufNewFile *.tex,*.md,*.txt set wrap linebreak
-autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+autocmd BufRead,BufNewFile *.c set filetype=c
+autocmd BufRead,BufNewFile *.h set filetype=cpp
 
 " Make calcurse notes markdown compatible:
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -341,7 +347,7 @@ autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
 autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+autocmd Filetype rmd inoremap ,c ```<CR>```<CR><CR><esc>2kO
 
 """.xml
 autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
@@ -350,8 +356,10 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 """.c
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
-autocmd FileType c noremap <F5> :call CurtineIncSw()<CR>
+autocmd FileType c,cpp noremap <F5> :call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
+
+autocmd FileType c,cpp nnoremap <c-k><c-d> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
@@ -361,5 +369,5 @@ vnoremap J xp`[V`]
 vnoremap L >gv
 vnoremap H <gv
 
-map <enter><enter> yi[:e <c-r>"<cr>
+map <enter><enter> yi[:e <c-r>"<CR>
 

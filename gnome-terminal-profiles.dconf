@@ -1,0 +1,9 @@
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+foreground-color='rgb(215,215,215)'
+visible-name='BTerm'
+palette=['rgb(29,29,29)', 'rgb(210,82,82)', 'rgb(165,194,97)', 'rgb(255,227,73)', 'rgb(35,98,123)', 'rgb(209,151,217)', 'rgb(115,173,159)', 'rgb(232,231,242)', 'rgb(83,83,83)', 'rgb(255,0,0)', 'rgb(194,224,117)', 'rgb(255,255,0)', 'rgb(118,151,184)', 'rgb(200,153,214)', 'rgb(84,157,150)', 'rgb(227,234,242)']
+use-system-font=false
+highlight-colors-set=false
+use-theme-colors=false
+font='SF Mono 11'
+background-color='rgb(29,29,29)'
