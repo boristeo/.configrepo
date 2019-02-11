@@ -25,6 +25,6 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/pack/bt/start/YouCompleteMe"]
-	path = .vim/pack/bt/start/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
+[submodule ".vim/pack/bt/start/vim-lldb"]
+	path = .vim/pack/bt/start/vim-lldb
+	url = https://github.com/gilligan/vim-lldb.git
