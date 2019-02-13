@@ -55,7 +55,7 @@ set cinoptions=:0,l1
 set foldmethod=syntax
 set foldlevelstart=10
 
-function! MyFoldText() " {{{
+function! MyFoldText()
     let line = getline(v:foldstart)
     let eline = getline(v:foldend)
 
@@ -63,7 +63,6 @@ function! MyFoldText() " {{{
     let windowwidth = winwidth(0) - nucolwidth - 3
     let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
     let onetab = strpart('          ', 0, &tabstop)
     let line = substitute(line, '\t', onetab, 'g')
     let eline = substitute(eline, '\t', onetab, 'g')
@@ -71,7 +70,7 @@ function! MyFoldText() " {{{
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
 	let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
+endfunction
 set foldtext=MyFoldText()
 
 " Wrapping
@@ -267,14 +266,31 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "/___/_//_/_/ .__/ .__/\__/\__/___/
 "          /_/  /_/
 
+" Force Save
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Compilation
+function! ExitHandler(job, stat)
+	echo 'Completed '.string(a:job).' with status '.string(a:stat)
+endfunction
+function! OutHandler(job, message)
+endfunction
+
+
 """LATEX
 " Word count:
 autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
 autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
 
 " Compile document:
-autocmd FileType tex inoremap <F5> <Esc>:w <Enter>:silent exec "!pdflatex<space><c-r>%<space>>/dev/null"<Enter><c-l>a
-autocmd FileType tex nnoremap <F5> :w <Enter>:silent exec "!pdflatex<space><c-r>%<space>>/dev/null"<Enter><c-l>
+function! TeXCompile()
+	:silent! w
+	let src_f = expand('%')
+	let job = job_start('pdflatex '.src_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+endfunction
+
+autocmd FileType tex inoremap <F5> <Esc>:call<space>TeXCompile()<CR>a
+autocmd FileType tex nnoremap <F5> :call<space>TeXCompile()<CR>
 
 " Document Setup
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
@@ -356,6 +372,17 @@ autocmd FileType bib inoremap ,b @book{<Enter><tab>author<Space>=<Space>"<++>",<
 autocmd FileType bib inoremap ,c @incollection{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>booktitle<Space>=<Space>"<++>",<Enter><tab>editor<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>publisher<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>8kA,<Esc>i
 
 "MARKDOWN
+" Compile document:
+function! MD_Compile()
+	:silent! w
+	let src_f = expand('%')
+	let out_f = expand('%:r').'.pdf'
+	let job = job_start("pandoc ".src_f." -o ".out_f)
+endfunction
+
+autocmd FileType markdown inoremap <F5> <Esc>:call<space>MD_Compile()<Enter>a
+autocmd FileType markdown nnoremap <F5> :call<space>MD_Compile()<CR>
+
 autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
