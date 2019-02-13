@@ -60,15 +60,16 @@ function! MyFoldText()
     let eline = getline(v:foldend)
 
     let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
+    let windowwidth = winwidth(0) - nucolwidth - 6
     let foldedlinecount = v:foldend - v:foldstart
 
     let onetab = strpart('          ', 0, &tabstop)
     let line = substitute(line, '\t', onetab, 'g')
-    let eline = substitute(eline, '\t', onetab, 'g')
+    let eline = substitute(eline, '\t', '', 'g')
+    let eline = substitute(eline, ' ', '', 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-	let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    "let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
     return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction
 set foldtext=MyFoldText()
@@ -97,7 +98,17 @@ hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE
 hi Folded ctermbg=darkgrey
 hi Folded ctermfg=white
 
-" Syntastic
+" clang_complete
+set conceallevel=2
+set concealcursor=vin
+set pumheight=20
+set completeopt=menu,menuone
+let g:clang_snippets=1
+let g:clang_conceal_snippets=1
+let g:clang_snippets_engine='clang_complete'
+let g:clang_library_path = "/usr/lib/llvm-6.0/lib"
+
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -110,7 +121,6 @@ let g:tex_flavor = "latex"
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
 let g:syntastic_html_tidy_exec = 'tidy'
-let g:clang_library_path = "/usr/lib/llvm-6.0/lib"
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
 " /  ' \/ _ `/ _ \/ _ \/ / _ \/ _ `(_-<
@@ -409,7 +419,7 @@ autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
 autocmd FileType c,cpp noremap <F5> :w<CR>:call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
-autocmd FileType c,cpp nnoremap <c-k><c-d> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
+autocmd FileType c,cpp nnoremap <c-f><c-f> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
 autocmd FileType c,cpp imap <c-space> <c-x><c-u>
 autocmd FileType c,cpp imap <c-@> <c-space>
 
