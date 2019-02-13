@@ -28,9 +28,9 @@
 [submodule ".vim/pack/bt/start/vim-lldb"]
 	path = .vim/pack/bt/start/vim-lldb
 	url = https://github.com/gilligan/vim-lldb.git
-[submodule ".vim/pack/bt/start/clang_complete"]
-	path = .vim/pack/bt/start/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule ".vim/pack/bt/start/asyncrun.vim"]
 	path = .vim/pack/bt/start/asyncrun.vim
 	url = https://github.com/skywind3000/asyncrun.vim.git
+[submodule ".vim/pack/bt/start/vim-clang"]
+	path = .vim/pack/bt/start/vim-clang
+	url = https://github.com/justmao945/vim-clang.git
