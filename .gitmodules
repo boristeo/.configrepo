@@ -34,3 +34,6 @@
 [submodule ".vim/pack/bt/start/vim-clang"]
 	path = .vim/pack/bt/start/vim-clang
 	url = https://github.com/justmao945/vim-clang.git
+[submodule ".vim/pack/bt/start/vim-visual-star-search"]
+	path = .vim/pack/bt/start/vim-visual-star-search
+	url = https://github.com/bronson/vim-visual-star-search.git

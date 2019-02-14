@@ -26,6 +26,10 @@ set ttyfast
 set lazyredraw
 syntax on
 set autoread
+set backspace=indent,eol,start
+
+set incsearch
+set hlsearch
 
 " Enable override from working dir
 set exrc
@@ -98,15 +102,9 @@ hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE
 hi Folded ctermbg=darkgrey
 hi Folded ctermfg=white
 
-" clang_complete
-set conceallevel=2
-set concealcursor=vin
-set pumheight=20
-set completeopt=menu,menuone
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-let g:clang_snippets_engine='clang_complete'
-let g:clang_library_path = "/usr/lib/llvm-6.0/lib"
+" Completions
+set pumheight=10
+set completeopt=menu,menuone,preview
 
 
 let g:syntastic_always_populate_loc_list = 1
@@ -121,6 +119,8 @@ let g:tex_flavor = "latex"
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
 let g:syntastic_html_tidy_exec = 'tidy'
+let g:syntastic_loc_list_height=4
+
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
 " /  ' \/ _ `/ _ \/ _ \/ / _ \/ _ `(_-<

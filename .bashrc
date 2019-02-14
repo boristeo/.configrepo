@@ -10,6 +10,8 @@ alias xcode='open -a /Applications/Xcode.app'
 alias ll='ls -al'
 alias tmux="tmux -2"
 alias mc=". /usr/local/Cellar/midnight-commander/4.8.22/libexec/mc/mc-wrapper.sh"
+alias vi=/usr/local/bin/vim
+alias vim=/usr/local/bin/vim
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
