@@ -105,21 +105,22 @@ hi Folded ctermfg=white
 " Completions
 set pumheight=10
 set completeopt=menu,menuone,preview
+imap <c-space> <c-x><c-u>
+imap <c-@> <c-space>
 
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_c_check_header = 1
-let g:syntastic_c_compiler = "clang"
-let g:syntastic_c_compiler_options = "-std=c99 -pedantic"
 let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
-let g:syntastic_cpp_compiler = "clang++"
-let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
+
+let g:clang_c_options = '-std=c99'
+let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++'
+
 
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
@@ -420,8 +421,6 @@ autocmd FileType c,cpp noremap <F5> :w<CR>:call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
 autocmd FileType c,cpp nnoremap <c-f><c-f> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
-autocmd FileType c,cpp imap <c-space> <c-x><c-u>
-autocmd FileType c,cpp imap <c-@> <c-space>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
