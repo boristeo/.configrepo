@@ -105,7 +105,7 @@ hi Folded ctermfg=white
 " Completions
 set pumheight=10
 set completeopt=menu,menuone,preview
-imap <c-space> <c-x><c-u>
+imap <c-space> <c-n>
 imap <c-@> <c-space>
 
 
@@ -120,7 +120,9 @@ let g:syntastic_loc_list_height=4
 
 let g:clang_c_options = '-std=c99'
 let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++'
-
+let g:clang_format_style = 'file'
+let g:clang_check_syntax_auto = 0
+let g:clang_verbose_pmenu=1
 
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
