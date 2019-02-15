@@ -5,10 +5,17 @@
 "|___/_/_/ /_/ /_/_/   \___/
 "------------------------------------------------------------------------------
 
+" Sections marked with `#@#' tag
 " OPTIONS    20
 " MAPPINGS  100
 " AUTOCMD   200
 " SNIPPETS  240
+
+
+""" INCLUDES
+so ~/.vim/luke/prose.vim
+so ~/.vim/luke/deadkeys.vim
+so ~/.vim/luke/ipa.vim
 
 
 "            __  _
@@ -16,6 +23,7 @@
 "/ _ \/ _ \/ __/ / _ \/ _ \(_-<
 "\___/ .__/\__/_/\___/_//_/___/
 "   /_/
+"#@#
 
 " Some basics:
 set nocompatible
@@ -27,6 +35,9 @@ set lazyredraw
 syntax on
 set autoread
 set backspace=indent,eol,start
+
+set mouse=a
+set mousehide
 
 set incsearch
 set hlsearch
@@ -127,6 +138,7 @@ let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++'
 " /  ' \/ _ `/ _ \/ _ \/ / _ \/ _ `(_-<
 "/_/_/_/\_,_/ .__/ .__/_/_//_/\_, /___/
 "          /_/  /_/          /___/
+"#@#
 
 "let maplddeader =" "
 
@@ -162,9 +174,6 @@ map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
 " View an image for a suckless sent presentation:
 map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
 
-" Open my bibliography file in split
-map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
-
 " Open the selected text in a split (i.e. should be a file).
 map <leader>o "oyaW:sp <C-R>o<CR>
 xnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
@@ -173,12 +182,6 @@ vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
 
-" Open corresponding.pdf
-map <leader>p :!opout <c-r>%<CR><CR>
-
-" Compile document
-map <leader>b :!compiler <c-r>%<CR>
-
 "For saving view folds:
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
@@ -186,21 +189,13 @@ map <leader>b :!compiler <c-r>%<CR>
 " Interpret .md files, etc. as .markdown
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
-" Get line, word and character counts with F3:
-map <F3> :!wc <C-R>%<CR>
-
-" Spell-check set to F6:
-map <F6> :setlocal spell! spelllang=en_us<CR>
-
 " Toggle DeadKeys set (for accent marks):
-so ~/.vim/luke/deadkeys.vim
 nm <leader><leader>d :call ToggleDeadKeys()<CR>
-imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
+imap <leader><leader>d <C-\><C-O>:call ToggleDeadKeys()<CR>
 
 " Source my IPA shorcuts:
-so ~/.vim/luke/ipa.vim
 nm <leader><leader>i :call ToggleIPA()<CR>
-imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
+imap <leader><leader>i <C-\><C-O>:call ToggleIPA()<CR>
 
 " Use urlview to choose and open a url:
 :noremap <leader>u :w<Home>silent <End> !urlview<CR>
@@ -211,13 +206,36 @@ vnoremap <C-c> "*Y :let @+=@*<CR>
 map <C-p> "+P
 
 " Goyo plugin makes text more readable when writing prose:
-map <F10> :Goyo<CR>
 map <leader>f :Goyo \| set linebreak<CR>
-inoremap <F10> <esc>:Goyo<CR>a
 
-" Toggle Prose Mode with F8:
-so ~/.vim/luke/prose.vim
-nm <F8> :call ToggleProse()<CR>
+nnoremap <F1> <NOP>
+nnoremap <F2> <NOP>
+nnoremap <F3> :!wc <C-R>%<CR>
+nnoremap <F4> <NOP>
+autocmd FileType markdown,tex nnoremap <F5> :call Compile()<CR>
+autocmd FileType markdown,tex nnoremap <F6> :call OpenOut()<CR>
+nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
+nnoremap <F8> :call ToggleProse()<CR>
+nnoremap <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
+" TODO fix numbering after quitting goyo
+nnoremap <F10> :Goyo<CR>:set norelativenumber<CR>
+nnoremap <F11> <NOP>
+nnoremap <F12> <NOP>
+
+inoremap <F1> <NOP>
+inoremap <F2> <NOP>
+inoremap <F3> <C-\><C-O>:!wc <C-R>%<CR>
+inoremap <F4> <NOP>
+autocmd FileType markdown,tex inoremap <F5> <C-\><C-O>:call Compile()<CR>
+autocmd FileType markdown,tex inoremap <F6> <C-\><C-O>:call OpenOut()<CR>
+inoremap <F7> <C-\><C-O>:setlocal spell! spelllang=en_us<CR>
+inoremap <F8> <C-\><C-O>:call ToggleProse()<CR>
+inoremap <F9> <NOP>
+" TODO fix goyo so it doesn't change numbering type
+inoremap <F10> <C-\><C-O>:Goyo<CR><C-\><C-O>set norelativenumber
+inoremap <F11> <NOP>
+inoremap <F12> <NOP>
+
 
 " C-T for new tab
 nnoremap <c-n><c-t> :w<CR>:tabnew<CR>
@@ -236,15 +254,22 @@ map <leader><Tab> <Esc>/<++><Enter>"_c4l
 inoremap jw <Esc>
 inoremap wj <Esc>
 
+" Open filename under cursor in new tab
 nnoremap gf <c-w>gf
 
 "            __                    __
 " ___ ___ __/ /____  ______ _  ___/ /
 "/ _ `/ // / __/ _ \/ __/  ' \/ _  /
 "\_,_/\_,_/\__/\___/\__/_/_/_/\_,_/
+"#@#
 
 " Makefiles need real tabs
 autocmd FileType make set noexpandtab
+
+" Setup correct compiler
+autocmd FileType tex let g:compiler="pdflatex"
+autocmd FileType markdown let g:compiler="pandoc"
+autocmd FileType tex,markdown let g:compiler_outext="pdf"
 
 " Filetype resolution
 autocmd BufRead,BufNewFile *.tex,*.md,*.txt set wrap linebreak
@@ -276,6 +301,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " (_-</ _ \/ / _ \/ _ \/ -_) __(_-<
 "/___/_//_/_/ .__/ .__/\__/\__/___/
 "          /_/  /_/
+"#@#
 
 " Force Save
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -284,24 +310,30 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 function! ExitHandler(job, stat)
 	echo 'Completed '.string(a:job).' with status '.string(a:stat)
 endfunction
+
 function! OutHandler(job, message)
+endfunction
+
+function! Compile()
+	:silent! w
+	let src_f = expand('%')
+	let out_f = expand('%:r').".".g:compiler_outext
+	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+endfunction
+
+function! OpenOut()
+	:silent! w
+	let src_f = expand('%')
+	let out_f = expand('%:r').".".g:compiler_outext
+	let job = job_start("open ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
 endfunction
 
 
 """LATEX
 " Word count:
 autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
-autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
+autocmd FileType tex inoremap <F3> <C-\><C-O>:w !detex \| wc -w<CR>
 
-" Compile document:
-function! TeXCompile()
-	:silent! w
-	let src_f = expand('%')
-	let job = job_start('pdflatex '.src_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
-endfunction
-
-autocmd FileType tex inoremap <F5> <Esc>:call<space>TeXCompile()<CR>a
-autocmd FileType tex nnoremap <F5> :call<space>TeXCompile()<CR>
 
 " Document Setup
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
@@ -383,17 +415,6 @@ autocmd FileType bib inoremap ,b @book{<Enter><tab>author<Space>=<Space>"<++>",<
 autocmd FileType bib inoremap ,c @incollection{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>booktitle<Space>=<Space>"<++>",<Enter><tab>editor<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>publisher<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>8kA,<Esc>i
 
 "MARKDOWN
-" Compile document:
-function! MD_Compile()
-	:silent! w
-	let src_f = expand('%')
-	let out_f = expand('%:r').'.pdf'
-	let job = job_start("pandoc ".src_f." -o ".out_f)
-endfunction
-
-autocmd FileType markdown inoremap <F5> <Esc>:call<space>MD_Compile()<Enter>a
-autocmd FileType markdown nnoremap <F5> :call<space>MD_Compile()<CR>
-
 autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
