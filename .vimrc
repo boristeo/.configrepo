@@ -6,24 +6,18 @@
 "------------------------------------------------------------------------------
 
 " Sections marked with `#@#' tag
-" OPTIONS    20
-" MAPPINGS  100
-" AUTOCMD   200
-" SNIPPETS  240
-
 
 """ INCLUDES
 so ~/.vim/luke/prose.vim
 so ~/.vim/luke/deadkeys.vim
 so ~/.vim/luke/ipa.vim
 
-
+"#@#options----------------------
 "            __  _
 " ___  ___  / /_(_)__  ___  ___
 "/ _ \/ _ \/ __/ / _ \/ _ \(_-<
 "\___/ .__/\__/_/\___/_//_/___/
 "   /_/
-"#@#
 
 " Some basics:
 set nocompatible
@@ -35,12 +29,19 @@ set lazyredraw
 syntax on
 set autoread
 set backspace=indent,eol,start
+"set modifiable
+set autowrite
 
 set mouse=a
 set mousehide
 
+" Case insensitive search unless you use capital letters
+set ignorecase
+set smartcase
+
 set incsearch
 set hlsearch
+set gdefault
 
 " Enable override from working dir
 set exrc
@@ -59,6 +60,8 @@ set statusline+=%*
 set tabstop=4
 set softtabstop=4
 set autoindent
+set smartindent
+set cindent
 set shiftwidth=4
 set smarttab
 filetype indent on
@@ -130,17 +133,17 @@ let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
 
 let g:clang_c_options = '-std=c99'
-let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++'
+let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++ -Wall -Wshadow -Wpedantic -Wno-pragma-once-outside-header'
 let g:clang_format_style = 'file'
-let g:clang_check_syntax_auto = 0
+let g:clang_check_syntax_auto = 1
 let g:clang_verbose_pmenu=1
 
+"#@#mappings-----------------------------
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
 " /  ' \/ _ `/ _ \/ _ \/ / _ \/ _ `(_-<
 "/_/_/_/\_,_/ .__/ .__/_/_//_/\_, /___/
 "          /_/  /_/          /___/
-"#@#
 
 "let maplddeader =" "
 
@@ -159,6 +162,9 @@ vnoremap <C-d> yP
 
 " Shift tab removes indent
 inoremap <S-Tab> <C-d>
+
+" Brackets
+inoremap {<CR> {<CR>}<C-o>O
 
 " Shortcutting split navigation, saving a keypress:
 "map <C-h> <C-w>h
@@ -259,11 +265,11 @@ inoremap wj <Esc>
 " Open filename under cursor in new tab
 nnoremap gf <c-w>gf
 
+"#@#autocmd---------------------------
 "            __                    __
 " ___ ___ __/ /____  ______ _  ___/ /
 "/ _ `/ // / __/ _ \/ __/  ' \/ _  /
 "\_,_/\_,_/\__/\___/\__/_/_/_/\_,_/
-"#@#
 
 " Makefiles need real tabs
 autocmd FileType make set noexpandtab
@@ -275,8 +281,6 @@ autocmd FileType tex,markdown let g:compiler_outext="pdf"
 
 " Filetype resolution
 autocmd BufRead,BufNewFile *.tex,*.md,*.txt set wrap linebreak
-autocmd BufRead,BufNewFile *.c set filetype=c
-autocmd BufRead,BufNewFile *.h set filetype=cpp
 
 " Make calcurse notes markdown compatible:
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -298,12 +302,12 @@ autocmd VimLeave *.tex !texclear %
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+"#@#snippets-------------------------
 "            _               __
 "  ___ ___  (_)__  ___  ___ / /____
 " (_-</ _ \/ / _ \/ _ \/ -_) __(_-<
 "/___/_//_/_/ .__/ .__/\__/\__/___/
 "          /_/  /_/
-"#@#
 
 " Force Save
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -439,11 +443,13 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 
 """.c
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
+autocmd FileType c,cpp inoremap /sep /----------------------------------------------------------------------<CR>//<Space>
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c,cpp noremap <F5> :w<CR>:call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
-autocmd FileType c,cpp nnoremap <c-f><c-f> :w<CR>:!clang-format<space>-style=file<space>-i<space><c-r>%<CR>l<CR>l
+autocmd FileType c,cpp nnoremap <c-f><c-f> :ClangFormat
+autocmd FileType c,cpp nnoremap <c-f><c-f> <c-\><c-o>:ClangFormat<CR>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
