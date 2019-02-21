@@ -27,9 +27,9 @@ set termencoding=utf-8
 set ttyfast
 set lazyredraw
 syntax on
-set autoread
 set backspace=indent,eol,start
 "set modifiable
+set autoread
 set autowrite
 
 set mouse=a
@@ -88,7 +88,7 @@ function! MyFoldText()
 
     "let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
 	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
-    return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+    return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 set foldtext=MyFoldText()
 
@@ -105,16 +105,22 @@ set wildmenu
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
+set fillchars+=stl:━
+set fillchars+=stlnc:─
 set fillchars+=vert:│
+set fillchars+=fold:\ "
+set fillchars+=diff:\ "
 
 " Highlighting
 hi EndOfBuffer cterm=NONE ctermbg=NONE ctermfg=black
 hi MatchParen cterm=NONE ctermbg=NONE ctermfg=lightblue
 hi ColorColumn ctermbg=darkgrey guibg=darkgrey
 hi LineNr ctermfg=darkgrey
-hi VertSplit cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE
-hi Folded ctermbg=darkgrey
-hi Folded ctermfg=white
+hi VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=NONE
+hi statusline cterm=none ctermbg=none ctermfg=darkgrey
+hi statuslinenc cterm=none ctermbg=none ctermfg=darkgrey
+hi Folded ctermbg=black
+hi Folded ctermfg=darkgrey
 
 " Completions
 set pumheight=10
@@ -125,7 +131,6 @@ imap <c-@> <c-space>
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
