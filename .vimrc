@@ -28,8 +28,8 @@ set termencoding=utf-8
 " Let's try this out
 set hidden
 
-set nottyfast
-set nolazyredraw
+set ttyfast
+set lazyredraw
 
 syntax on
 set backspace=indent,eol,start
@@ -37,6 +37,22 @@ set backspace=indent,eol,start
 set autoread
 set autowrite
 set signcolumn=yes
+
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+
+set laststatus=2
+set statusline=
+set statusline+=%{StatuslineGit()}
+set noshowcmd
 
 set mouse=a
 set mousehide
@@ -88,7 +104,7 @@ function! MyFoldText()
     let onetab = strpart('          ', 0, &tabstop)
     let line = substitute(line, '\t', onetab, 'g')
     let eline = substitute(eline, '\t', '', 'g')
-    let eline = substitute(eline, ' ', '', 'g')
+    let eline = substitute(eline, '^\s\{}', '', 'g')
 
     "let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
 	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
@@ -121,21 +137,22 @@ hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
 hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
-hi VertSplit				ctermbg=NONE	ctermfg=0       cterm=NONE
-hi statusline				ctermbg=NONE	ctermfg=0       cterm=NONE
-hi statuslinenc				ctermbg=NONE	ctermfg=0		cterm=NONE
-hi Folded					ctermbg=NONE	ctermfg=8		cterm=NONE
-hi StatusLineTerm			ctermbg=NONE	ctermfg=4		cterm=NONE
-hi StatusLineTermNC			ctermbg=NONE	ctermfg=4		cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
-hi TabLineFill				ctermbg=8		ctermfg=8		cterm=NONE
-hi TabLine					ctermbg=8		ctermfg=7		cterm=NONE
-hi TabLineSel				ctermbg=0		ctermfg=7		cterm=NONE
-hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterChange			ctermbg=NONE    ctermfg=8		cterm=NONE
-hi GitGutterDelete			ctermbg=NONE    ctermfg=8		cterm=NONE
-hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
+hi Folded					ctermbg=NONE	ctermfg=8		cterm=NONE
+hi StatusLine				ctermbg=8		ctermfg=7       cterm=NONE
+hi StatusLineNC				ctermbg=8		ctermfg=7		cterm=NONE
+hi StatusLineTerm			ctermbg=8		ctermfg=4		cterm=NONE
+hi StatusLineTermNC			ctermbg=8		ctermfg=4		cterm=NONE
+hi TabLineFill				ctermbg=0		ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=0		ctermfg=7		cterm=NONE
+hi TabLineSel				ctermbg=8		ctermfg=7		cterm=NONE
+hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi LineNr					ctermbg=8		ctermfg=7		cterm=NONE
+hi GitGutterAdd				ctermbg=8		ctermfg=7		cterm=NONE
+hi GitGutterChange			ctermbg=8		ctermfg=7		cterm=NONE
+hi GitGutterDelete			ctermbg=8		ctermfg=7		cterm=NONE
+hi GitGutterChangeDelete	ctermbg=8	    ctermfg=7		cterm=NONE
 
 
 " Completions
