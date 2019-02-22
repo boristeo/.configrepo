@@ -24,13 +24,19 @@ set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
-set ttyfast
-set lazyredraw
+
+" Let's try this out
+set hidden
+
+set nottyfast
+set nolazyredraw
+
 syntax on
 set backspace=indent,eol,start
 "set modifiable
 set autoread
 set autowrite
+set signcolumn=yes
 
 set mouse=a
 set mousehide
@@ -43,6 +49,8 @@ set incsearch
 set hlsearch
 set gdefault
 
+set belloff=all
+
 " Enable override from working dir
 set exrc
 set secure
@@ -50,11 +58,6 @@ set secure
 " Gutter numbers
 set number
 set norelativenumber
-
-" Status line
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 " Indentation
 set tabstop=4
@@ -64,13 +67,14 @@ set smartindent
 set cindent
 set shiftwidth=4
 set smarttab
-filetype indent on
+filetype plugin indent on
 
+set ruler
 " Alignment of switch and case statements
 set cinoptions=:0,l1
 
 " Folding
-set foldmethod=syntax
+set foldmethod=manual
 set foldlevelstart=10
 
 function! MyFoldText()
@@ -101,6 +105,7 @@ set fo-=a
 " Enable autocompletion:
 set wildmode=longest,list,full
 set wildmenu
+set wildignorecase
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
@@ -112,19 +117,30 @@ set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
 " Highlighting
-hi EndOfBuffer cterm=NONE ctermbg=NONE ctermfg=black
-hi MatchParen cterm=NONE ctermbg=NONE ctermfg=lightblue
-hi ColorColumn ctermbg=darkgrey guibg=darkgrey
-hi LineNr ctermfg=darkgrey
-hi VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=NONE
-hi statusline cterm=none ctermbg=none ctermfg=darkgrey
-hi statuslinenc cterm=none ctermbg=none ctermfg=darkgrey
-hi Folded ctermbg=black
-hi Folded ctermfg=darkgrey
+hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
+hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
+hi Search					ctermbg=3		ctermfg=0		cterm=NONE
+hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=0       cterm=NONE
+hi statusline				ctermbg=NONE	ctermfg=0       cterm=NONE
+hi statuslinenc				ctermbg=NONE	ctermfg=0		cterm=NONE
+hi Folded					ctermbg=NONE	ctermfg=8		cterm=NONE
+hi StatusLineTerm			ctermbg=NONE	ctermfg=4		cterm=NONE
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=4		cterm=NONE
+hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
+hi TabLineFill				ctermbg=8		ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=8		ctermfg=7		cterm=NONE
+hi TabLineSel				ctermbg=0		ctermfg=7		cterm=NONE
+hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterChange			ctermbg=NONE    ctermfg=8		cterm=NONE
+hi GitGutterDelete			ctermbg=NONE    ctermfg=8		cterm=NONE
+hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
+
 
 " Completions
 set pumheight=10
-set completeopt=menu,menuone,preview
+set completeopt=longest,menuone,preview
 imap <c-space> <c-n>
 imap <c-@> <c-space>
 
@@ -136,6 +152,7 @@ let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
+let g:syntastic_disabled_filetypes=['c','cpp','h']
 
 let g:clang_c_options = '-std=c99'
 let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++ -Wall -Wshadow -Wpedantic -Wno-pragma-once-outside-header'
@@ -225,7 +242,9 @@ nnoremap <F1> <NOP>
 nnoremap <F2> <NOP>
 nnoremap <F3> :!wc <C-R>%<CR>
 nnoremap <F4> <NOP>
+nnoremap <F5> <NOP>
 autocmd FileType markdown,tex nnoremap <F5> :call Compile()<CR>
+nnoremap <F6> <NOP>
 autocmd FileType markdown,tex nnoremap <F6> :call OpenOut()<CR>
 nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
 nnoremap <F8> :call ToggleProse()<CR>
@@ -235,11 +254,14 @@ nnoremap <F10> :Goyo<CR>:set norelativenumber<CR>
 nnoremap <F11> <NOP>
 nnoremap <F12> <NOP>
 
+
 inoremap <F1> <NOP>
 inoremap <F2> <NOP>
 inoremap <F3> <C-\><C-O>:!wc <C-R>%<CR>
 inoremap <F4> <NOP>
+inoremap <F5> <NOP>
 autocmd FileType markdown,tex inoremap <F5> <C-\><C-O>:call Compile()<CR>
+inoremap <F6> <NOP>
 autocmd FileType markdown,tex inoremap <F6> <C-\><C-O>:call OpenOut()<CR>
 inoremap <F7> <C-\><C-O>:setlocal spell! spelllang=en_us<CR>
 inoremap <F8> <C-\><C-O>:call ToggleProse()<CR>
