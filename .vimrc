@@ -153,27 +153,6 @@ colorscheme paramount
 set background=dark
 " Highlighting
 
-hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
-hi Search					ctermbg=3		ctermfg=0		cterm=NONE
-hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
-hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
-hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
-hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi StatusLine				ctermbg=8		ctermfg=7       cterm=NONE
-hi StatusLineNC				ctermbg=8		ctermfg=7		cterm=NONE
-hi StatusLineTerm			ctermbg=8		ctermfg=4		cterm=NONE
-hi StatusLineTermNC			ctermbg=8		ctermfg=4		cterm=NONE
-hi TabLineFill				ctermbg=8		ctermfg=8		cterm=NONE
-hi TabLine					ctermbg=8		ctermfg=7		cterm=NONE
-hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
-hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
-hi LineNr					ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterAdd				ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterChange			ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterDelete			ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterChangeDelete	ctermbg=8	    ctermfg=7		cterm=NONE
-
 
 " Completions
 set pumheight=10
@@ -255,8 +234,8 @@ vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 nnoremap S :%s//g<Left><Left>
 
 "For saving view folds:
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+autocmd BufWritePost,BufLeave,WinLeave ?* mkview
+autocmd BufWinEnter ?* silent loadview
 
 nnoremap za zA
 
@@ -520,7 +499,7 @@ autocmd FileType c,cpp inoremap /sep /------------------------------------------
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
-autocmd FileType c,cpp nnoremap <c-f><c-f> :ClangFormat
+autocmd FileType c,cpp nnoremap <c-f><c-f> :ClangFormat<CR>
 autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:ClangFormat<CR>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
