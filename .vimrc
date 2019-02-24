@@ -35,7 +35,7 @@ so ~/.vim/luke/ipa.vim
 
 
 " Some basics:
-set term=xterm
+set term=xterm-256color
 set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
@@ -50,20 +50,23 @@ set hidden
 syntax on
 set backspace=indent,eol,start
 "set modifiable
-"set autoread
-"set autowrite
+set autoread
+set autowrite
 set signcolumn=yes
 
 
-function! GitBranch()
+function GitBranch()
 	let dir = fnamemodify(resolve(expand('%:p')),":h")
 	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! StatuslineGit()
-	let fillcharcount = winwidth(0) - len(GitBranch()) - len(expand('%f')) - 2
+	if !exists("b:branch")
+		let b:branch = GitBranch()
+	endif
+	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 2
 	let fillchar = '─'
-    return fillchar . GitBranch() . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
+    return fillchar . b:branch . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
 endfunction
 
 
@@ -137,6 +140,11 @@ set wildignorecase
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
+set fillchars+=stl:─
+set fillchars+=stlnc:━"
+set fillchars+=vert:│
+set fillchars+=fold:\ "
+set fillchars+=diff:\ "
 
 colorscheme default
 " Highlighting
