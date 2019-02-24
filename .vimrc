@@ -57,6 +57,9 @@ set signcolumn=yes
 
 function GitBranch()
 	let dir = fnamemodify(resolve(expand('%:p')),":h")
+	if dir[0:0] != "/"
+		return ""
+	endif
 	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
