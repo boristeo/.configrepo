@@ -107,7 +107,7 @@ filetype plugin indent on
 set cinoptions=:0,l1
 
 " Folding
-set foldmethod=manual
+set foldmethod=syntax
 set foldlevelstart=10
 
 function! MyFoldText()
@@ -149,7 +149,8 @@ set fillchars+=vert:┃
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
-colorscheme default
+colorscheme paramount
+set background=dark
 " Highlighting
 
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
@@ -157,7 +158,7 @@ hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
 hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
-hi Folded					ctermbg=NONE	ctermfg=8		cterm=NONE
+hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi StatusLine				ctermbg=8		ctermfg=7       cterm=NONE
 hi StatusLineNC				ctermbg=8		ctermfg=7		cterm=NONE
 hi StatusLineTerm			ctermbg=8		ctermfg=4		cterm=NONE
@@ -184,11 +185,12 @@ imap <c-@> <c-space>
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['flake8']
 let g:tex_flavor = "latex"
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
-let g:syntastic_disabled_filetypes=['c','cpp','h']
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_c_checkers=[]
+let g:syntastic_cpp_checkers=[]
 
 let g:clang_c_options = '-std=c99'
 let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++ -Wall -Wshadow -Wpedantic -Wno-pragma-once-outside-header'
@@ -253,8 +255,10 @@ vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 nnoremap S :%s//g<Left><Left>
 
 "For saving view folds:
-"au BufWinLeave * mkview
-"au BufWinEnter * silent loadview
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
+nnoremap za zA
 
 " Interpret .md files, etc. as .markdown
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
@@ -284,6 +288,7 @@ nnoremap <F3> :!wc <C-R>%<CR>
 nnoremap <F4> <NOP>
 nnoremap <F5> <NOP>
 autocmd FileType markdown,tex nnoremap <F5> :call Compile()<CR>
+autocmd FileType c,cpp nnoremap <F5> :call CurtineIncSw()<CR>
 nnoremap <F6> <NOP>
 autocmd FileType markdown,tex nnoremap <F6> :call OpenOut()<CR>
 nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
@@ -300,6 +305,7 @@ inoremap <F2> <NOP>
 inoremap <F3> <C-\><C-O>:!wc <C-R>%<CR>
 inoremap <F4> <NOP>
 inoremap <F5> <NOP>
+autocmd FileType c,cpp inoremap <F5> <C-\><C-O>:call CurtineIncSw()<CR>
 autocmd FileType markdown,tex inoremap <F5> <C-\><C-O>:call Compile()<CR>
 inoremap <F6> <NOP>
 autocmd FileType markdown,tex inoremap <F6> <C-\><C-O>:call OpenOut()<CR>
@@ -512,11 +518,10 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
 autocmd FileType c,cpp inoremap /sep /----------------------------------------------------------------------<CR>//<Space>
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
-autocmd FileType c,cpp noremap <F5> :w<CR>:call CurtineIncSw()<CR>
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
 autocmd FileType c,cpp nnoremap <c-f><c-f> :ClangFormat
-autocmd FileType c,cpp nnoremap <c-f><c-f> <c-\><c-o>:ClangFormat<CR>
+autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:ClangFormat<CR>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
