@@ -19,7 +19,23 @@ so ~/.vim/luke/ipa.vim
 "\___/ .__/\__/_/\___/_//_/___/
 "   /_/
 
+""TRAINING WHEELS
+"inoremap <UP> <NOP>
+"inoremap <DOWN> <NOP>
+"inoremap <LEFT> <NOP>
+"inoremap <RIGHT> <NOP>
+"noremap <UP> <NOP>
+"noremap <DOWN> <NOP>
+"noremap <LEFT> <NOP>
+"noremap <RIGHT> <NOP>
+"noremap h <NOP>
+""noremap j <NOP>
+""noremap k <NOP>
+"noremap l <NOP>
+
+
 " Some basics:
+set term=xterm
 set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
@@ -28,35 +44,32 @@ set termencoding=utf-8
 " Let's try this out
 set hidden
 
-set ttyfast
-set lazyredraw
+"set ttyfast
+"set nolazyredraw
 
 syntax on
 set backspace=indent,eol,start
 "set modifiable
-set autoread
-set autowrite
+"set autoread
+"set autowrite
 set signcolumn=yes
 
 
 function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+	let dir = fnamemodify(resolve(expand('%:p')),":h")
+	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+	let fillcharcount = winwidth(0) - len(GitBranch()) - len(expand('%f')) - 2
+	let fillchar = '─'
+    return fillchar . GitBranch() . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
 endfunction
 
 
 set laststatus=2
 set statusline=
 set statusline+=%{StatuslineGit()}
-set noshowcmd
-
-set mouse=a
-set mousehide
-
 " Case insensitive search unless you use capital letters
 set ignorecase
 set smartcase
@@ -85,8 +98,6 @@ set shiftwidth=4
 set smarttab
 filetype plugin indent on
 
-set ruler
-" Alignment of switch and case statements
 set cinoptions=:0,l1
 
 " Folding
@@ -126,14 +137,10 @@ set wildignorecase
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
-set fillchars+=stl:━
-set fillchars+=stlnc:─
-set fillchars+=vert:│
-set fillchars+=fold:\ "
-set fillchars+=diff:\ "
 
+colorscheme default
 " Highlighting
-hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
+
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
 hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
@@ -144,10 +151,11 @@ hi StatusLine				ctermbg=8		ctermfg=7       cterm=NONE
 hi StatusLineNC				ctermbg=8		ctermfg=7		cterm=NONE
 hi StatusLineTerm			ctermbg=8		ctermfg=4		cterm=NONE
 hi StatusLineTermNC			ctermbg=8		ctermfg=4		cterm=NONE
-hi TabLineFill				ctermbg=0		ctermfg=8		cterm=NONE
-hi TabLine					ctermbg=0		ctermfg=7		cterm=NONE
-hi TabLineSel				ctermbg=8		ctermfg=7		cterm=NONE
+hi TabLineFill				ctermbg=8		ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=8		ctermfg=7		cterm=NONE
+hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
 hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
 hi LineNr					ctermbg=8		ctermfg=7		cterm=NONE
 hi GitGutterAdd				ctermbg=8		ctermfg=7		cterm=NONE
 hi GitGutterChange			ctermbg=8		ctermfg=7		cterm=NONE
@@ -194,10 +202,14 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" Scroll n lines at a time
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
 " Duplicate line with <C-d>
-nnoremap <C-d> yyp
-inoremap <C-d> <Esc>yypi
-vnoremap <C-d> yP
+"nnoremap <C-d> yyp
+"inoremap <C-d> <Esc>yypi
+"vnoremap <C-d> yP
 
 " Shift tab removes indent
 inoremap <S-Tab> <C-d>
