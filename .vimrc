@@ -141,8 +141,8 @@ set wildignorecase
 set splitbelow
 set splitright
 set fillchars+=stl:─
-set fillchars+=stlnc:━"
-set fillchars+=vert:│
+set fillchars+=stlnc:┸
+set fillchars+=vert:┃
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
