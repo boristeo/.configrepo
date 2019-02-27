@@ -49,7 +49,7 @@ set ttyfast
 set nolazyredraw
 
 syntax on
-"set backspace=indent,eol,start
+set backspace=indent,eol,start
 "set modifiable
 set autoread
 set autowrite
@@ -369,9 +369,16 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Compilation
 function! ExitHandler(job, stat)
 	echo 'Completed '.string(a:job).' with status '.string(a:stat)
+	edit!
 endfunction
 
 function! OutHandler(job, message)
+endfunction
+
+function! ClangFormat()
+	:silent! w
+	let src_f = expand('%')
+	let job = job_start("clang-format ".src_f." -i -style=file", {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
 endfunction
 
 function! Compile()
@@ -501,8 +508,8 @@ autocmd FileType c,cpp inoremap /sep /------------------------------------------
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
-autocmd FileType c,cpp nnoremap <c-f><c-f> :ClangFormat<CR>
-autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:ClangFormat<CR>
+autocmd FileType c,cpp nnoremap <c-f><c-f> :call ClangFormat()<CR>
+autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:call ClangFormat()<CR>
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
