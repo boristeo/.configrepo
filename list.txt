@@ -7,3 +7,5 @@
 .tmux.conf
 .bash_sessions_disable
 .tools
+.chunkwmrc
+.skhdrc
