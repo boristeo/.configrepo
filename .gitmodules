@@ -25,15 +25,9 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/pack/bt/start/vim-lldb"]
-	path = .vim/pack/bt/start/vim-lldb
-	url = https://github.com/gilligan/vim-lldb.git
 [submodule ".vim/pack/bt/start/asyncrun.vim"]
 	path = .vim/pack/bt/start/asyncrun.vim
 	url = https://github.com/skywind3000/asyncrun.vim.git
-[submodule ".vim/pack/bt/start/vim-clang"]
-	path = .vim/pack/bt/start/vim-clang
-	url = https://github.com/justmao945/vim-clang.git
 [submodule ".vim/pack/bt/start/vim-visual-star-search"]
 	path = .vim/pack/bt/start/vim-visual-star-search
 	url = https://github.com/bronson/vim-visual-star-search.git

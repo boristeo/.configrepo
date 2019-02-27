@@ -40,20 +40,20 @@ set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
+filetype plugin on
 
 " Let's try this out
 set hidden
 
-"set ttyfast
-"set nolazyredraw
+set ttyfast
+set nolazyredraw
 
 syntax on
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
 "set modifiable
 set autoread
 set autowrite
 set signcolumn=yes
-
 
 function GitBranch()
 	let dir = fnamemodify(resolve(expand('%:p')),":h")
@@ -97,17 +97,15 @@ set norelativenumber
 " Indentation
 set tabstop=4
 set softtabstop=4
-set autoindent
-set smartindent
-set cindent
 set shiftwidth=4
 set smarttab
-filetype plugin indent on
-
+set autoindent
+set cindent
 set cinoptions=:0,l1
 
+
 " Folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=10
 
 function! MyFoldText()
@@ -171,12 +169,6 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_c_checkers=[]
 let g:syntastic_cpp_checkers=[]
 
-let g:clang_c_options = '-std=c99'
-let g:clang_cpp_options = '-std=gnu++11 -stdlib=libc++ -Wall -Wshadow -Wpedantic -Wno-pragma-once-outside-header'
-let g:clang_format_style = 'file'
-let g:clang_check_syntax_auto = 1
-let g:clang_verbose_pmenu=1
-
 "#@#mappings-----------------------------
 "                        _
 "  __ _  ___ ____  ___  (_)__  ___ ____
@@ -185,6 +177,9 @@ let g:clang_verbose_pmenu=1
 "          /_/  /_/          /___/
 
 "let maplddeader =" "
+
+" Annoying without this
+nnoremap <BS> <NOP>
 
 " For moving lines (^] is a special character; use <M-k> and <M-j> if it works)
 nnoremap <C-j> :m .+1<CR>==
@@ -233,10 +228,7 @@ vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
 
-"For saving view folds:
-autocmd BufWritePost,BufLeave,WinLeave ?* mkview
-autocmd BufWinEnter ?* silent loadview
-
+" Deep toggle folds
 nnoremap za zA
 
 " Interpret .md files, etc. as .markdown
@@ -322,6 +314,16 @@ nnoremap gf <c-w>gf
 " ___ ___ __/ /____  ______ _  ___/ /
 "/ _ `/ // / __/ _ \/ __/  ' \/ _  /
 "\_,_/\_,_/\__/\___/\__/_/_/_/\_,_/
+
+" Open quickfix if available
+augroup OpenQuickfixWindowAfterMake
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+augroup END
+
+"For saving view folds:
+"autocmd BufWritePost,BufLeave,WinLeave ?* mkview
+"autocmd BufWinEnter ?* silent loadview
 
 " Makefiles need real tabs
 autocmd FileType make set noexpandtab
