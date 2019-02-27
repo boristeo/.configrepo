@@ -183,6 +183,9 @@ nnoremap <BS> <NOP>
 
 inoremap <C-w> <C-\><C-o><C-w>
 
+" Hopefully reformat on close braces
+inoremap } }<Esc>=i{]}a
+
 " For moving lines (^] is a special character; use <M-k> and <M-j> if it works)
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
