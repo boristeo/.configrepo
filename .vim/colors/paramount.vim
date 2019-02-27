@@ -19,13 +19,13 @@ endif
 
 let g:colors_name='paramount'
 
-let s:black           = { "gui": "#000000", "cterm": "232" }
-let s:medium_gray     = { "gui": "#767676", "cterm": "243" }
+let s:black           = { "gui": "#000000", "cterm": "NONE" }
+let s:medium_gray     = { "gui": "#767676", "cterm": "248" }
 let s:white           = { "gui": "#F1F1F1", "cterm": "15"  }
 let s:actual_white    = { "gui": "#FFFFFF", "cterm": "231" }
 let s:subtle_black    = { "gui": "#303030", "cterm": "236" }
-let s:light_black     = { "gui": "#262626", "cterm": "235" }
-let s:lighter_black   = { "gui": "#4E4E4E", "cterm": "239" }
+let s:light_black     = { "gui": "#262626", "cterm": "243" }
+let s:lighter_black   = { "gui": "#4E4E4E", "cterm": "243" }
 let s:light_gray      = { "gui": "#A8A8A8", "cterm": "248" }
 let s:lighter_gray    = { "gui": "#C6C6C6", "cterm": "251" }
 let s:lightest_gray   = { "gui": "#EEEEEE", "cterm": "255" }
@@ -90,9 +90,9 @@ endfunction
 call s:h("Normal",        {"bg": s:bg, "fg": s:norm})
 
 " restore &background's value in case changing Normal changed &background (:help :hi-normal-cterm)
-if &background != s:background
-   execute "set background=" . s:background
-endif
+"if &background != s:background
+"   execute "set background=" . s:background
+"endif
 
 call s:h("Cursor",        {"bg": s:purple, "fg": s:norm })
 call s:h("Comment",       {"fg": s:bg_subtle, "gui": "italic"})
@@ -231,20 +231,20 @@ hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
 hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
-hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi StatusLine				ctermbg=8		ctermfg=7       cterm=NONE
-hi StatusLineNC				ctermbg=8		ctermfg=7		cterm=NONE
-hi StatusLineTerm			ctermbg=8		ctermfg=4		cterm=NONE
-hi StatusLineTermNC			ctermbg=8		ctermfg=4		cterm=NONE
-hi TabLineFill				ctermbg=8		ctermfg=8		cterm=NONE
-hi TabLine					ctermbg=8		ctermfg=7		cterm=NONE
+"hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi StatusLine				ctermbg=NONE	ctermfg=15      cterm=NONE
+hi StatusLineNC				ctermbg=NONE	ctermfg=15		cterm=NONE
+hi StatusLineTerm			ctermbg=NONE	ctermfg=4		cterm=NONE
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=8		cterm=NONE
+hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
 hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
-hi LineNr					ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterAdd				ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterChange			ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterDelete			ctermbg=8		ctermfg=7		cterm=NONE
-hi GitGutterChangeDelete	ctermbg=8	    ctermfg=7		cterm=NONE
+"hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
 
 
