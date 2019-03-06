@@ -8,10 +8,10 @@ function! FindInc()
 endfun
 
 function! CurtineIncSw()
-  if exists("t:IncSw")
-    e#
-    return 0
-  endif
+"  if exists("t:IncSw")
+"    e#
+"    return 0
+"  endif
 
   if match(expand("%"), '\.c') > 0
     let t:IncSw=substitute(expand("%:t"), '\.c\(.*\)', '.h*', "")

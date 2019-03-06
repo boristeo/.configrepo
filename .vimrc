@@ -16,7 +16,7 @@ so ~/.vim/luke/ipa.vim
 "            __  _
 " ___  ___  / /_(_)__  ___  ___
 "/ _ \/ _ \/ __/ / _ \/ _ \(_-<
-"\___/ .__/\__/_/\___/_//_/___/
+"\___/ .__/\__/_/\___/_//_/___/:
 "   /_/
 
 ""TRAINING WHEELS
@@ -41,6 +41,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
 filetype plugin on
+"set autochdir
 
 " Let's try this out
 set hidden
@@ -55,6 +56,8 @@ set autoread
 set autowrite
 set signcolumn=yes
 
+set mouse=a
+
 function GitBranch()
 	let dir = fnamemodify(resolve(expand('%:p')),":h")
 	if dir[0:0] != "/"
@@ -67,9 +70,9 @@ function! StatuslineGit()
 	if !exists("b:branch")
 		let b:branch = GitBranch()
 	endif
-	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 2
-	let fillchar = '─'
-    return fillchar . b:branch . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
+	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 3
+	let fillchar = ' '
+    return (fillchar == ' ' ? '[' : fillchar) . b:branch . (fillchar == ' ' ? ']' : fillchar) . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
 endfunction
 
 
@@ -105,7 +108,7 @@ set cinoptions=:0,l1
 
 
 " Folding
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevelstart=10
 
 function! MyFoldText()
@@ -137,18 +140,19 @@ set fo-=a
 set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.o,*.d
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
-set fillchars+=stl:╨
-set fillchars+=stlnc:┸
-set fillchars+=vert:┃
+set fillchars+=stlnc:\ "╨
+set fillchars+=stl:\ "┴
+set fillchars+=vert:│
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
 colorscheme paramount
-set background=dark
 " Highlighting
 
 
@@ -168,6 +172,9 @@ let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_c_checkers=[]
 let g:syntastic_cpp_checkers=[]
+let g:termdebug_wide = 176
+"let termdebugger = "lldb"
+packadd termdebug
 
 "#@#mappings-----------------------------
 "                        _
@@ -176,15 +183,22 @@ let g:syntastic_cpp_checkers=[]
 "/_/_/_/\_,_/ .__/ .__/_/_//_/\_, /___/
 "          /_/  /_/          /___/
 
+" Never use x so here is a better option
+command WW bp<bar>bd #
+
+" Keep on accidentally typing Q instead of q
+command Q q
+
 "let maplddeader =" "
 
 " Annoying without this
 nnoremap <BS> <NOP>
 
+" And this
 inoremap <C-w> <C-\><C-o><C-w>
 
-" Hopefully reformat on close braces
-inoremap } }<Esc>=i{]}a
+" Remove all spaces but go into insert mode
+nnoremap J Jcl
 
 " For moving lines (^] is a special character; use <M-k> and <M-j> if it works)
 nnoremap <C-j> :m .+1<CR>==
@@ -300,7 +314,7 @@ nnoremap L gt
 nnoremap H gT
 
 " NTree opens in new tabs
-let NERDTreeMapOpenInTab='<ENTER>'
+"let NERDTreeMapOpenInTab='<ENTER>'
 
 " Navigating with guides
 inoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
@@ -312,7 +326,7 @@ inoremap jw <Esc>
 inoremap wj <Esc>
 
 " Open filename under cursor in new tab
-nnoremap gf <c-w>gf
+nnoremap gf :vertical wincmd f<CR>
 
 "#@#autocmd---------------------------
 "            __                    __
@@ -509,12 +523,15 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 
 """.c
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
-autocmd FileType c,cpp inoremap /sep /----------------------------------------------------------------------<CR>//<Space>
+autocmd FileType c,cpp inoremap /sep /===----------------------------------------------------------------------===//
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
 autocmd FileType c,cpp nnoremap <c-f><c-f> :call ClangFormat()<CR>
 autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:call ClangFormat()<CR>
+
+" Hopefully reformat on close braces
+""autocmd FileType c,cpp inoremap } }<Esc>:call ClangFormat()<CR>]}a
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++

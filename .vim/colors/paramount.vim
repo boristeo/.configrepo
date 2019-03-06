@@ -22,7 +22,7 @@ let g:colors_name='paramount'
 let s:black           = { "gui": "#000000", "cterm": "NONE" }
 let s:medium_gray     = { "gui": "#767676", "cterm": "248" }
 let s:white           = { "gui": "#F1F1F1", "cterm": "15"  }
-let s:actual_white    = { "gui": "#FFFFFF", "cterm": "231" }
+let s:actual_white    = { "gui": "#FFFFFF", "cterm": "NONE" }
 let s:subtle_black    = { "gui": "#303030", "cterm": "236" }
 let s:light_black     = { "gui": "#262626", "cterm": "243" }
 let s:lighter_black   = { "gui": "#4E4E4E", "cterm": "243" }
@@ -226,16 +226,17 @@ hi link GitGutterChangeDelete       LineNr
 
 
 """ CUSTOM
+if &background == "dark"
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
 hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
-hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
 "hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi StatusLine				ctermbg=NONE	ctermfg=15      cterm=NONE
-hi StatusLineNC				ctermbg=NONE	ctermfg=15		cterm=NONE
-hi StatusLineTerm			ctermbg=NONE	ctermfg=4		cterm=NONE
-hi StatusLineTermNC			ctermbg=NONE	ctermfg=8		cterm=NONE
+hi StatusLine				ctermbg=NONE	ctermfg=243      cterm=NONE
+hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=NONE
 hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
 hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
@@ -247,4 +248,26 @@ hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
 "hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
 "hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
 
+else
+hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
+hi Search					ctermbg=3		ctermfg=0		cterm=NONE
+hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
+hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
+"hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi StatusLine				ctermbg=NONE	ctermfg=243     cterm=standout
+hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=standout
+hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=standout
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=standout
+hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
+hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
+"hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterAdd			ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
+"hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
+endif
 
