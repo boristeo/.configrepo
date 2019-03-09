@@ -12,6 +12,8 @@ so ~/.vim/luke/prose.vim
 so ~/.vim/luke/deadkeys.vim
 so ~/.vim/luke/ipa.vim
 
+
+
 "#@#options----------------------
 "            __  _
 " ___  ___  / /_(_)__  ___  ___
@@ -69,10 +71,13 @@ endfunction
 function! StatuslineGit()
 	if !exists("b:branch")
 		let b:branch = GitBranch()
+		if len(b:branch) == 0
+		let b:branch = 'local'
+		endif
 	endif
-	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 3
-	let fillchar = ' '
-    return (fillchar == ' ' ? '[' : fillchar) . b:branch . (fillchar == ' ' ? ']' : fillchar) . repeat(fillchar,fillcharcount) . expand('%f') . fillchar
+	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 8
+	let fillchar = '─'
+    return '᚜ ' . b:branch . ' ᚛' . repeat(fillchar,fillcharcount) . '᚜ ' . expand('%f') . ' ᚛'
 endfunction
 
 
@@ -146,8 +151,8 @@ set wildignore+=*.o,*.d
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
-set fillchars+=stlnc:\ "╨
-set fillchars+=stl:\ "┴
+set fillchars+=stl:\ "╨
+set fillchars+=stlnc:\ "┴
 set fillchars+=vert:│
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
@@ -183,11 +188,16 @@ packadd termdebug
 "/_/_/_/\_,_/ .__/ .__/_/_//_/\_, /___/
 "          /_/  /_/          /___/
 
-" Never use x so here is a better option
+" Close buffer but not split
 command WW bp<bar>bd #
 
 " Keep on accidentally typing Q instead of q
 command Q q
+command W w
+
+" Force Save
+command WS execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 
 "let maplddeader =" "
 
@@ -212,16 +222,11 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Duplicate line with <C-d>
-"nnoremap <C-d> yyp
-"inoremap <C-d> <Esc>yypi
-"vnoremap <C-d> yP
-
 " Shift tab removes indent
 inoremap <S-Tab> <C-d>
 
 " Brackets
-inoremap {<CR> {<CR>}<C-o>O
+"inoremap {<CR> {<CR>}<C-o>O
 
 " Shortcutting split navigation, saving a keypress:
 "map <C-h> <C-w>h
@@ -230,8 +235,8 @@ inoremap {<CR> {<CR>}<C-o>O
 "map <C-l> <C-w>l
 
 " Plugin toggles
-nmap <leader>1 :NERDTreeToggle<CR>
-nmap <leader>7 :TagbarToggle<CR>
+nmap <C-1> :NERDTreeToggle<CR>
+nmap <C-7> :TagbarToggle<CR>
 
 " Open file as suckless sent presentation
 map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
@@ -254,20 +259,17 @@ nnoremap za zA
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 " Toggle DeadKeys set (for accent marks):
-nm <leader><leader>d :call ToggleDeadKeys()<CR>
-imap <leader><leader>d <C-\><C-O>:call ToggleDeadKeys()<CR>
+command ACC call ToggleDeadKeys()
 
 " Source my IPA shorcuts:
-nm <leader><leader>i :call ToggleIPA()<CR>
-imap <leader><leader>i <C-\><C-O>:call ToggleIPA()<CR>
+command IPA call ToggleIPA()
 
 " Use urlview to choose and open a url:
-:noremap <leader>u :w<Home>silent <End> !urlview<CR>
-:noremap ,, :w<Home>silent <End> !urlview<CR>
+noremap <C-w><C-w><C-w> :w<Home>silent <End> !urlview<CR>
+noremap ,, :w<Home>silent <End> !urlview<CR>
 
 " Copy selected text to system clipboard (requires gvim installed):
 vnoremap <C-c> "*Y :let @+=@*<CR>
-map <C-p> "+P
 
 " Goyo plugin makes text more readable when writing prose:
 map <leader>f :Goyo \| set linebreak<CR>
@@ -317,13 +319,8 @@ nnoremap H gT
 "let NERDTreeMapOpenInTab='<ENTER>'
 
 " Navigating with guides
-inoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 vnoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 map <leader><Tab> <Esc>/<++><Enter>"_c4l
-
-" For normal mode when in terminals (in X I have caps mapped to esc, this replaces it when I don't have X)
-inoremap jw <Esc>
-inoremap wj <Esc>
 
 " Open filename under cursor in new tab
 nnoremap gf :vertical wincmd f<CR>
@@ -381,9 +378,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " (_-</ _ \/ / _ \/ _ \/ -_) __(_-<
 "/___/_//_/_/ .__/ .__/\__/\__/___/
 "          /_/  /_/
-
-" Force Save
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Compilation
 function! ExitHandler(job, stat)
@@ -542,4 +536,3 @@ vnoremap L >gv
 vnoremap H <gv
 
 map <enter><enter> yi[:e <c-r>"<CR>
-

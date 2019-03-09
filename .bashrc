@@ -1,4 +1,5 @@
 export LANG=en_US.UTF-8
+export LC_ALL="en_US.UTF-8"
 
 export PATH=${PATH}:~/.tools
 
@@ -58,7 +59,7 @@ then
         if ps $PPID |grep mc; then
             export PS1="\W \$(__git_ps1 '[git:%s] ')\$ "
         else
-            export PS1="\[\033[1;36m\]\u@\h\[\033[1;00m\]:\[\033[1;34m\]\W \[\033[0;33m\]\$(__git_ps1 '\[\033[07m\]%s\[\033[0;00m\] ')\[\033[1;34m\]\$ \[\033[1;00m\]"
+			export PS1="\[\033[1;36m\]\u@\h\[\033[1;00m\]:\[\033[1;34m\]\W \[\033[0;33m\]\$(__git_ps1 '\[\033[07m\]%s\[\033[0;00m\] ')\[\033[1;34m\]\$ \[\033[1;00m\]"
         fi
     else
         brew install git

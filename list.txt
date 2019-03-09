@@ -9,3 +9,4 @@
 .tools
 .chunkwmrc
 .skhdrc
+.urlview
