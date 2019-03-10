@@ -75,9 +75,10 @@ function! StatuslineGit()
 		let b:branch = 'local'
 		endif
 	endif
-	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 8
+	let fillcharedges = 3
+	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 8 - 2 * fillcharedges
 	let fillchar = '─'
-    return '᚜ ' . b:branch . ' ᚛' . repeat(fillchar,fillcharcount) . '᚜ ' . expand('%f') . ' ᚛'
+    return repeat(fillchar, fillcharedges) . '< ' . b:branch . ' >' . repeat(fillchar,fillcharcount) . '< ' . expand('%f') . ' >' . repeat(fillchar, fillcharedges)
 endfunction
 
 
@@ -137,8 +138,6 @@ set foldtext=MyFoldText()
 
 " Wrapping
 set nowrap
-set formatoptions-=tc
-set fo-=a
 "set textwidth=80
 
 " Enable autocompletion:
@@ -517,7 +516,6 @@ autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 
 """.c
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
-autocmd FileType c,cpp inoremap /sep /===----------------------------------------------------------------------===//
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c noremap <F6> :vertical wincmd f<CR>
 
@@ -526,6 +524,9 @@ autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:call ClangFormat()<CR>
 
 " Hopefully reformat on close braces
 ""autocmd FileType c,cpp inoremap } }<Esc>:call ClangFormat()<CR>]}a
+
+autocmd FileType c,cpp inoremap ***<CR> ************************************************************<CR>
+autocmd FileType c,cpp inoremap ***/ <C-\><C-o>d0 ************************************************************/
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++

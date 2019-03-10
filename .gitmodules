@@ -34,3 +34,6 @@
 [submodule ".vim/pack/bt/start/vim-plugin-autosess"]
 	path = .vim/pack/bt/start/vim-plugin-autosess
 	url = https://github.com/powerman/vim-plugin-autosess.git
+[submodule ".vim/pack/bt/start/vim-commentary"]
+	path = .vim/pack/bt/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git

@@ -255,10 +255,10 @@ hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
 hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
 "hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi StatusLine				ctermbg=NONE	ctermfg=243     cterm=standout
-hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=standout
-hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=standout
-hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=standout
+hi StatusLine				ctermbg=NONE	ctermfg=243     cterm=NONE
+hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=NONE
 hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
 hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
