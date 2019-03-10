@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/boristeo/Documents/Boris_School_Work/CMPS101/CMPS110/src/bateodor/cmps110'
 let g:netrw_dirhist_2='/Users/boristeo/.configrepo/.vim/bundle'
 let g:netrw_dirhist_3='/Users/boristeo/.configrepo/.git'
+let g:netrw_dirhist_4='/home/boristeo/School/CMPE105/bateodor/asgn3'
+let g:netrw_dirhist_5='/home/boristeo'
+let g:netrw_dirhist_6='/home/boristeo/School/CMPE105/bateodor/asgn3'

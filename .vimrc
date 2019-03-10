@@ -166,6 +166,7 @@ set completeopt=longest,menuone,preview
 imap <c-space> <c-n>
 imap <c-@> <c-space>
 
+let g:netrw_winsize=20
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -234,8 +235,8 @@ inoremap <S-Tab> <C-d>
 "map <C-l> <C-w>l
 
 " Plugin toggles
-nmap <C-1> :NERDTreeToggle<CR>
-nmap <C-7> :TagbarToggle<CR>
+command LEX Lex
+command TT TagbarToggle
 
 " Open file as suckless sent presentation
 map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
