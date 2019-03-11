@@ -180,6 +180,7 @@ let g:netrw_winsize=20
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_check_on_wq = 0
 let g:tex_flavor = "latex"
 let g:syntastic_html_tidy_exec = 'tidy'
@@ -371,7 +372,15 @@ autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
 " Automatically deletes all tralling whitespace on save.
-autocmd BufWritePre * %s/\s\+$//e
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 autocmd BufWritePost ~/.scripts/folders,~/.scripts/configs !bash ~/.scripts/shortcuts.sh
@@ -392,6 +401,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Compilation
 function! ExitHandler(job, stat)
 	echo 'Completed '.string(a:job).' with status '.string(a:stat)
+endfunction
+
+function! ExitHandlerReload(job, stat)
+	echo 'Completed '.string(a:job).' with status '.string(a:stat)
 	edit!
 endfunction
 
@@ -401,7 +414,7 @@ endfunction
 function! ClangFormat()
 	:silent! w
 	let src_f = expand('%')
-	let job = job_start("clang-format ".src_f." -i -style=file", {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+	let job = job_start("clang-format ".src_f." -i -style=file", {"exit_cb": "ExitHandlerReload", "out_cb": "OutHandler"})
 endfunction
 
 function! Compile()
@@ -427,6 +440,7 @@ autocmd FileType tex inoremap <F3> <C-\><C-O>:w !detex \| wc -w<CR>
 
 " Document Setup
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,art \documentclass{article}<Enter><Enter>\usepackage[margin=1in]{geometry}<CR>\usepackage{nth}<CR><CR>\begin{document}<CR><CR>\end{document}<UP>
 autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 autocmd FileType tex inoremap ,up \usepackage{}<Esc>i
 
