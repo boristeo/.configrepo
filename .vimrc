@@ -123,12 +123,10 @@ function! MyFoldText()
 
     let nucolwidth = &fdc + &number * &numberwidth
 
-	let linenrwidth = 1
-	let lineorder = 1
+	let linenrwidth = 0
 	let linect = line('$')
 	while linect > 0
-		let lineorder = 10 * lineorder
-		let linect = linect / lineorder
+		let linect = linect / 10
 		let linenrwidth += 1
 	endwhile
 
