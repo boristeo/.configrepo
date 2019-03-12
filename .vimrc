@@ -327,6 +327,10 @@ nnoremap H gT
 " NTree opens in new tabs
 "let NERDTreeMapOpenInTab='<ENTER>'
 
+" close if final buffer is netrw or the quickfix
+autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+
 " Navigating with guides
 vnoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 map <leader><Tab> <Esc>/<++><Enter>"_c4l

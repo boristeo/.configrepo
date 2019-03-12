@@ -105,11 +105,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>629 33 638 281 0 0 1440 877 </string>
+	<string>632 210 638 94 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>394 417 918 452 0 0 1440 877 </string>
+	<string>394 383 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 877 0 0 1440 877 </string>
+	<string>0 0 1044 877 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -729,7 +729,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Inconsolata-Bold 14</string>
+			<string>Inconsolata-Bold 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2971,7 +2971,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-03-08T23:15:19Z</date>
+	<date>2019-03-11T05:37:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -2993,7 +2993,7 @@
 	<key>TerminalMargin</key>
 	<integer>2</integer>
 	<key>TerminalVMargin</key>
-	<integer>7</integer>
+	<integer>2</integer>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseExperimentalFontMetrics</key>
