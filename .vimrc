@@ -165,6 +165,7 @@ set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
 " colorscheme paramount
+set background=light " For some reason this is nicer than dark
 " Highlighting
 """ CUSTOM
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
