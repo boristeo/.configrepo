@@ -33,3 +33,6 @@
 [submodule ".vim/pack/bt/start/vim-commentary"]
 	path = .vim/pack/bt/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule ".vim/pack/bt/start/vim-clang-format"]
+	path = .vim/pack/bt/start/vim-clang-format
+	url = https://github.com/rhysd/vim-clang-format.git

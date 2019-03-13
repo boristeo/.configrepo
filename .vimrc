@@ -159,13 +159,35 @@ set wildignore+=*.o,*.d
 set splitbelow
 set splitright
 set fillchars+=stl:\ "╨
-set fillchars+=stlnc:\ "┴
+set fillchars+=stlnc:─"┴
 set fillchars+=vert:│
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
-colorscheme paramount
+" colorscheme paramount
 " Highlighting
+""" CUSTOM
+hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
+hi Search					ctermbg=3		ctermfg=0		cterm=NONE
+hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
+hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
+hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi StatusLine				ctermbg=NONE	ctermfg=243      cterm=NONE
+hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=NONE
+hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=NONE
+hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
+hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
+hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
+hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
+hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
+hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
+
 
 
 " Completions
@@ -189,6 +211,13 @@ let g:syntastic_cpp_checkers=[]
 let g:termdebug_wide = 176
 "let termdebugger = "lldb"
 packadd termdebug
+
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11"}
+
 
 "#@#mappings-----------------------------
 "                        _
@@ -343,6 +372,11 @@ nnoremap gf :vertical wincmd f<CR>
 " ___ ___ __/ /____  ______ _  ___/ /
 "/ _ `/ // / __/ _ \/ __/  ' \/ _  /
 "\_,_/\_,_/\__/\___/\__/_/_/_/\_,_/
+
+
+" Save last edit position
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 
 " Open quickfix if available
 augroup OpenQuickfixWindowAfterMake
@@ -554,6 +588,10 @@ autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:call ClangFormat()<CR>
 
 autocmd FileType c,cpp inoremap ***<CR> ************************************************************<CR>
 autocmd FileType c,cpp inoremap ***/ <C-\><C-o>d0 ************************************************************/
+
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
+
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
