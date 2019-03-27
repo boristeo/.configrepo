@@ -50587,13 +50587,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>821 33 638 77 0 0 1680 1027 </string>
+	<string>821 33 638 94 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 74 618 521 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>707 368 918 512 0 0 1680 1027 </string>
+	<string>766 422 918 423 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>840 0 840 1027 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -50744,13 +50744,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.78431373834609985</real>
+				<real>0.742919921875</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.44705882668495178</real>
+				<real>0.35953139667522216</real>
 				<key>Red Component</key>
-				<real>0.14117647707462311</real>
+				<real>0.20514865515035588</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -50770,13 +50770,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.80392158031463623</real>
+				<real>0.7523040771484375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.73386803646946286</real>
+				<real>0.69199752827936956</real>
 				<key>Red Component</key>
-				<real>0.4479738188401825</real>
+				<real>0.33769655367359519</real>
 			</dict>
 			<key>Ansi 7 Color</key>
 			<dict>
@@ -52803,6 +52803,8 @@
 	<real>572939517.02179599</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PinchToChangeFontSizeDisabled</key>
 	<true/>
 	<key>PointerActions</key>
@@ -52840,6 +52842,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/boristeo/.configrepo</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>ProportionalScrollWheelReporting</key>
