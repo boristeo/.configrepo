@@ -164,12 +164,17 @@ set fillchars+=vert:│
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
 
-" colorscheme paramount
-set background=dark " For some reason this is nicer than dark
+" colorscheme ir_black
+" set background=dark
+
+colorscheme default
+set background=light
+
 " Highlighting
 """ CUSTOM
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
 hi Search					ctermbg=3		ctermfg=0		cterm=NONE
+hi Comment					ctermbg=NONE	ctermfg=2		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
 hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
@@ -236,7 +241,6 @@ command W w
 
 " Force Save
 command WS execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
 
 "let maplddeader =" "
 
@@ -373,6 +377,7 @@ nnoremap gf :vertical wincmd f<CR>
 " ___ ___ __/ /____  ______ _  ___/ /
 "/ _ `/ // / __/ _ \/ __/  ' \/ _  /
 "\_,_/\_,_/\__/\___/\__/_/_/_/\_,_/
+
 
 
 " Save last edit position
@@ -597,9 +602,5 @@ autocmd FileType cpp ClangFormatAutoEnable
 vmap <expr> ++ VMATH_YankAndAnalyse()
 nmap ++ vip++
 
-vnoremap K xkP`[V`]
-vnoremap J xp`[V`]
-vnoremap L >gv
-vnoremap H <gv
-
 map <enter><enter> yi[:e <c-r>"<CR>
+

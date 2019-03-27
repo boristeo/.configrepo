@@ -3,20 +3,18 @@ export LC_ALL="en_US.UTF-8"
 
 export PATH=${PATH}:~/.scripts
 
+export VISUAL=vim
 export EDITOR=vim
 export PAGER=less
 
 # Aliases
 alias xcode='open -a /Applications/Xcode.app'
 alias ll='ls -al'
-alias tmux="tmux -2"
+alias ls='ls -G'
+alias tmux="tmux a"
 alias mc=". /usr/local/Cellar/midnight-commander/4.8.22/libexec/mc/mc-wrapper.sh"
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
-
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-
 
 # less/man colors
 export LESS=-R
