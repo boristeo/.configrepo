@@ -50593,9 +50593,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 74 618 521 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>766 422 918 423 0 0 1680 1027 </string>
+	<string>766 577 928 394 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>840 0 840 1027 0 0 1680 1027 </string>
+	<string>688 354 992 673 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 306 992 673 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -50796,13 +50796,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.40000000596046448</real>
+				<real>0.29999999999999999</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.40000000596046448</real>
+				<real>0.29999999999999999</real>
 				<key>Red Component</key>
-				<real>0.40000000596046448</real>
+				<real>0.29999999999999999</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
@@ -51343,6 +51343,19 @@
 			<integer>4</integer>
 			<key>Transparency</key>
 			<real>0.056018004441624365</real>
+			<key>Underline Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>1</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
+				<key>Green Component</key>
+				<real>1</real>
+				<key>Red Component</key>
+				<real>1</real>
+			</dict>
 			<key>Unicode Normalization</key>
 			<integer>0</integer>
 			<key>Unlimited Scrollback</key>
@@ -51352,9 +51365,11 @@
 			<key>Use Bright Bold</key>
 			<false/>
 			<key>Use Italic Font</key>
-			<false/>
+			<true/>
 			<key>Use Non-ASCII Font</key>
 			<false/>
+			<key>Use Underline Color</key>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>0.99824101091867468</real>
 			<key>Visual Bell</key>

@@ -177,7 +177,7 @@ hi Search					ctermbg=3		ctermfg=0		cterm=NONE
 hi Comment					ctermbg=NONE	ctermfg=2		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
-hi VertSplit				ctermbg=NONE	ctermfg=4       cterm=NONE
+hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
 hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
 hi StatusLine				ctermbg=NONE	ctermfg=243      cterm=NONE
 hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=NONE
@@ -193,6 +193,11 @@ hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
+hi DiffAdd					ctermbg=NONE	ctermfg=10		cterm=NONE
+hi DiffChange               ctermbg=8		ctermfg=NONE	cterm=NONE
+hi DiffText                 ctermbg=NONE    ctermfg=NONE	cterm=NONE
+hi DiffDelete               ctermbg=NONE	ctermfg=NONE	cterm=NONE
+hi FoldColumn               ctermbg=NONE	ctermfg=NONE	cterm=NONE
 
 
 
