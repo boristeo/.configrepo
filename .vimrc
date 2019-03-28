@@ -174,7 +174,7 @@ set background=light
 """ CUSTOM
 hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
 hi Search					ctermbg=3		ctermfg=0		cterm=NONE
-hi Comment					ctermbg=NONE	ctermfg=2		cterm=NONE
+hi Comment					ctermbg=NONE	ctermfg=10		cterm=NONE
 hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
 hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
 hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
@@ -193,7 +193,7 @@ hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
 hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
-hi DiffAdd					ctermbg=NONE	ctermfg=10		cterm=NONE
+hi DiffAdd					ctermbg=NONE	ctermfg=8		cterm=NONE
 hi DiffChange               ctermbg=8		ctermfg=NONE	cterm=NONE
 hi DiffText                 ctermbg=NONE    ctermfg=NONE	cterm=NONE
 hi DiffDelete               ctermbg=NONE	ctermfg=NONE	cterm=NONE
@@ -436,7 +436,7 @@ autocmd BufWritePost ~/.scripts/folders,~/.scripts/configs !bash ~/.scripts/shor
 autocmd VimLeave *.tex !texclear %
 
 " Disables automatic commenting on newline:
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "#@#snippets-------------------------
 "            _               __
@@ -597,8 +597,8 @@ autocmd FileType c,cpp inoremap <c-f><c-f> <c-\><c-o>:call ClangFormat()<CR>
 " Hopefully reformat on close braces
 ""autocmd FileType c,cpp inoremap } }<Esc>:call ClangFormat()<CR>]}a
 
-autocmd FileType c,cpp inoremap ***<CR> ************************************************************<CR>
-autocmd FileType c,cpp inoremap ***/ <C-\><C-o>d0 ************************************************************/
+autocmd FileType c,cpp inoremap ***<CR> ******************************************************************************************<CR>
+autocmd FileType c,cpp inoremap ***/ <C-\><C-o>dT*****************************************************************************************/<CR>
 
 autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable

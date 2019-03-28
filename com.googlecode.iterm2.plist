@@ -50593,9 +50593,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 74 618 521 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>766 577 928 394 0 0 1680 1027 </string>
+	<string>687 251 928 394 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>688 354 992 673 0 0 1680 1027 </string>
+	<string>840 0 840 1027 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 306 992 673 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -50627,26 +50627,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.27229997619360802</real>
+				<real>0.21263933181762693</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.27229997619360802</real>
+				<real>0.2387186032137833</real>
 				<key>Red Component</key>
-				<real>0.80392158031463623</real>
+				<real>0.756256103515625</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.54509806632995605</real>
+				<real>0.2989366406109184</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.81960785388946533</real>
+				<real>0.6555938720703125</real>
 				<key>Red Component</key>
-				<real>0.13725490868091583</real>
+				<real>0.46799182002459361</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
@@ -50718,13 +50718,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.46475543841097533</real>
+				<real>0.25628103413863085</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.73725491762161255</real>
+				<real>0.5292816162109375</real>
 				<key>Red Component</key>
-				<real>0.54569530142236256</real>
+				<real>0.24316620151512325</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>
@@ -50744,13 +50744,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.742919921875</real>
+				<real>0.6399993896484375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.35953139667522216</real>
+				<real>0.27418902310076126</real>
 				<key>Red Component</key>
-				<real>0.20514865515035588</real>
+				<real>0.12688464405833497</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -50809,13 +50809,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.29803922772407532</real>
+				<real>0.052599534392356873</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.29803922772407532</real>
+				<real>0.052599534392356873</real>
 				<key>Red Component</key>
-				<real>0.94509804248809814</real>
+				<real>0.62744140625</real>
 			</dict>
 			<key>BM Growl</key>
 			<false/>
@@ -51363,7 +51363,7 @@
 			<key>Use Bold Font</key>
 			<false/>
 			<key>Use Bright Bold</key>
-			<false/>
+			<true/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
@@ -52876,7 +52876,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-03-27T03:52:25Z</date>
+	<date>2019-03-28T04:16:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -52887,6 +52887,8 @@
 	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<false/>
+	<key>SmartCursorColorBgThreshold</key>
+	<real>0.80000001192092896</real>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
@@ -52906,6 +52908,8 @@
 		<string>Recent Directories</string>
 	</array>
 	<key>UseBorder</key>
+	<false/>
+	<key>UseColorfgbgFallback</key>
 	<false/>
 	<key>UseExperimentalFontMetrics</key>
 	<true/>

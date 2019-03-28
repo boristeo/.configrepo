@@ -9,12 +9,19 @@ export PAGER=less
 
 # Aliases
 alias xcode='open -a /Applications/Xcode.app'
-alias ll='ls -al'
-alias ls='ls -G'
 alias tmux="tmux a"
 alias mc=". /usr/local/Cellar/midnight-commander/4.8.22/libexec/mc/mc-wrapper.sh"
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
+
+if [ -x "$(command -v gls)" ]; then
+alias ls='gls --color=auto'
+alias ll='gls -al --color=auto'
+else
+alias ll='ls -al'
+alias ls='ls -G'
+fi
+
 
 # less/man colors
 export LESS=-R
@@ -26,9 +33,14 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+export LS_COLORS="di=35:ln=36:so=34:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43:or=31;1:*.zip=31:*.gz=31:*.bz2=31"
+
 
 # Tell grep to highlight matches
 export GREP_OPTIONS='--color=auto'
+
+# Config
+stty -ixon -ixoff
 
 
 # Sourcing additional plugins
