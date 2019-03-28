@@ -16,42 +16,29 @@ set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
 
-filetype plugin on
-syntax on
 set autochdir
 set hidden
-
-set nowrap
-
-set ttyfast
-set nolazyredraw
-set belloff=all
-
 set exrc
 set secure
-
 set modifiable
 set autoread
 set autowrite
 
-set mouse=a
-
+set ignorecase
 set smartcase
 set incsearch
-set hlsearch
-" Maybe change:
-set ignorecase
-set gdefault
+
+set belloff=all
 
 set backspace=indent,eol,start
 
+set nowrap
+
+filetype plugin indent on
+syntax on
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set smarttab
-set autoindent
-set cindent
-set cinoptions=:0,l1
 
 set number
 set norelativenumber
@@ -89,33 +76,86 @@ set fillchars+=diff:\ "
 colorscheme default
 set background=light
 
-hi MatchParen				ctermbg=NONE	ctermfg=12		cterm=NONE
-hi Search					ctermbg=3		ctermfg=0		cterm=NONE
-hi Comment					ctermbg=NONE	ctermfg=10		cterm=NONE
-hi ColorColumn				ctermbg=8		ctermfg=NONE    cterm=NONE
-hi Pmenu					ctermbg=0		ctermfg=7		cterm=NONE
-hi VertSplit				ctermbg=NONE	ctermfg=8       cterm=NONE
-hi Folded					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi StatusLine				ctermbg=NONE	ctermfg=243      cterm=NONE
-hi StatusLineNC				ctermbg=NONE	ctermfg=243		cterm=NONE
-hi StatusLineTerm			ctermbg=NONE	ctermfg=243		cterm=NONE
-hi StatusLineTermNC			ctermbg=NONE	ctermfg=243		cterm=NONE
-hi TabLineFill				ctermbg=NONE	ctermfg=8		cterm=NONE
-hi TabLine					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi TabLineSel				ctermbg=NONE	ctermfg=7		cterm=NONE
-hi Title					ctermbg=NONE	ctermfg=7		cterm=NONE
-hi EndOfBuffer				ctermbg=NONE	ctermfg=0		cterm=NONE
-hi LineNr					ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterAdd				ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterChange			ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterDelete			ctermbg=NONE	ctermfg=8		cterm=NONE
-hi GitGutterChangeDelete	ctermbg=NONE    ctermfg=8		cterm=NONE
-hi DiffAdd					ctermbg=NONE	ctermfg=8		cterm=NONE
-hi DiffChange               ctermbg=8		ctermfg=NONE	cterm=NONE
-hi DiffText                 ctermbg=NONE	    ctermfg=NONE	cterm=NONE
-hi DiffDelete               ctermbg=NONE	ctermfg=NONE	cterm=NONE
-hi FoldColumn               ctermbg=NONE	ctermfg=NONE	cterm=NONE
 
+hi MatchParen ctermbg=NONE
+hi Search ctermbg=3
+hi Comment ctermbg=NONE
+hi ColorColumn ctermbg=8
+hi Pmenu ctermbg=0
+hi VertSplit ctermbg=NONE
+hi Folded ctermbg=NONE
+hi StatusLine ctermbg=NONE
+hi StatusLineNC ctermbg=NONE
+hi StatusLineTerm ctermbg=NONE
+hi StatusLineTermNC ctermbg=NONE
+hi TabLineFill ctermbg=NONE
+hi TabLine ctermbg=NONE
+hi TabLineSel ctermbg=NONE
+hi Title ctermbg=NONE
+hi EndOfBuffer ctermbg=NONE
+hi LineNr ctermbg=NONE
+hi GitGutterAdd ctermbg=NONE
+hi GitGutterChange ctermbg=NONE
+hi GitGutterDelete ctermbg=NONE
+hi GitGutterChangeDelete ctermbg=NONE
+hi DiffAdd ctermbg=NONE
+hi DiffChange ctermbg=8
+hi DiffChange ctermfg=NONE
+hi DiffText ctermfg=NONE
+hi DiffDelete ctermfg=NONE
+hi FoldColumn ctermfg=NONE
+
+hi MatchParen ctermfg=12
+hi Search ctermfg=0
+hi Comment ctermfg=10
+hi ColorColumn ctermfg=NONE
+hi Pmenu ctermfg=7
+hi VertSplit ctermfg=8
+hi Folded ctermfg=7
+hi StatusLine ctermfg=8
+hi StatusLineNC ctermfg=8
+hi StatusLineTerm ctermfg=8
+hi StatusLineTermNC ctermfg=8
+hi TabLineFill ctermfg=8
+hi TabLine ctermfg=7
+hi TabLineSel ctermfg=7
+hi Title ctermfg=7
+hi EndOfBuffer ctermfg=0
+hi LineNr ctermfg=8
+hi GitGutterAdd ctermfg=8
+hi GitGutterChange ctermfg=8
+hi GitGutterDelete ctermfg=8
+hi GitGutterChangeDelete ctermfg=8
+hi DiffAdd ctermfg=8
+hi DiffText ctermbg=NONE
+hi DiffDelete ctermbg=NONE
+hi FoldColumn ctermbg=NONE
+
+hi MatchParen cterm=NONE
+hi Search cterm=NONE
+hi Comment cterm=NONE
+hi ColorColumn cterm=NONE
+hi Pmenu cterm=NONE
+hi VertSplit cterm=NONE
+hi Folded cterm=NONE
+hi StatusLine cterm=NONE
+hi StatusLineNC cterm=NONE
+hi StatusLineTerm cterm=NONE
+hi StatusLineTermNC cterm=NONE
+hi TabLineFill cterm=NONE
+hi TabLine cterm=NONE
+hi TabLineSel cterm=NONE
+hi Title cterm=NONE
+hi EndOfBuffer cterm=NONE
+hi LineNr cterm=NONE
+hi GitGutterAdd cterm=NONE
+hi GitGutterChange cterm=NONE
+hi GitGutterDelete cterm=NONE
+hi GitGutterChangeDelete cterm=NONE
+hi DiffAdd cterm=NONE
+hi DiffText cterm=NONE
+hi DiffDelete cterm=NONE
+hi FoldColumn cterm=NONE
 
 "#@#variables----------------------------
 
@@ -141,10 +181,10 @@ let termdebugger = "gdb"
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11"}
+			\ "AccessModifierOffset" : -4,
+			\ "AllowShortIfStatementsOnASingleLine" : "true",
+			\ "AlwaysBreakTemplateDeclarations" : "true",
+			\ "Standard" : "C++11"}
 
 
 "#@#mappings-----------------------------
@@ -353,22 +393,22 @@ function! StatuslineGit()
 	if !exists("b:branch")
 		let b:branch = GitBranch()
 		if len(b:branch) == 0
-		let b:branch = 'local'
+			let b:branch = 'local'
 		endif
 	endif
 	let fillcharedges = 3
 	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 8 - 2 * fillcharedges
 	let fillchar = '─'
-    return repeat(fillchar, fillcharedges) . '< ' . b:branch . ' >' . repeat(fillchar,fillcharcount) . '< ' . expand('%f') . ' >' . repeat(fillchar, fillcharedges)
+	return repeat(fillchar, fillcharedges) . '< ' . b:branch . ' >' . repeat(fillchar,fillcharcount) . '< ' . expand('%f') . ' >' . repeat(fillchar, fillcharedges)
 endfunction
 
 
 " Folding
 function! MyFoldText()
-    let line = getline(v:foldstart)
-    let eline = getline(v:foldend)
+	let line = getline(v:foldstart)
+	let eline = getline(v:foldend)
 
-    let nucolwidth = &fdc + &number * &numberwidth
+	let nucolwidth = &fdc + &number * &numberwidth
 
 	let linenrwidth = 0
 	let linect = line('$')
@@ -377,23 +417,23 @@ function! MyFoldText()
 		let linenrwidth += 1
 	endwhile
 
-    let windowwidth = winwidth(0) - nucolwidth - linenrwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+	let windowwidth = winwidth(0) - nucolwidth - linenrwidth - 3
+	let foldedlinecount = v:foldend - v:foldstart
 
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-    let eline = substitute(eline, '\t', '', 'g')
-    let eline = substitute(eline, '^\s\{}', '', 'g')
+	let onetab = strpart('          ', 0, &tabstop)
+	let line = substitute(line, '\t', onetab, 'g')
+	let eline = substitute(eline, '\t', '', 'g')
+	let eline = substitute(eline, '^\s\{}', '', 'g')
 
-    "let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+	"let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
 	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
-    return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
+	return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 
 " Automatically deletes all tralling whitespace on save.
 function! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+	let l = line(".")
+	let c = col(".")
+	%s/\s\+$//e
+	call cursor(l, c)
 endfun
