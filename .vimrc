@@ -5,16 +5,15 @@
 "|___/_/_/ /_/ /_/_/   \___/
 "------------------------------------------------------------------------------
 
-" Sections marked with `#@#' tag
+" Sections marked with `@@' tag
 
-"#@#options----------------------
-
-" Some basics:
+"@@options----------------------
 set nocompatible
 set term=xterm-256color
 set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
+set mouse=a
 
 set autochdir
 set hidden
@@ -30,19 +29,19 @@ set incsearch
 
 set belloff=all
 
-set backspace=indent,eol,start
-
-set nowrap
-
 filetype plugin indent on
 syntax on
+colorscheme btcolor
+
+set backspace=indent,eol,start
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set nowrap
 
 set number
 set norelativenumber
-set signcolumn=yes
+set signcolumn=no
 
 set foldmethod=syntax
 set foldlevelstart=10
@@ -51,7 +50,14 @@ set foldtext=MyFoldText()
 set laststatus=2
 set statusline=%{StatuslineGit()}
 
-" Completions
+set splitbelow
+set splitright
+set fillchars+=stl:\ "╨
+set fillchars+=stlnc:─"┴
+set fillchars+=vert:│
+set fillchars+=fold:\ "
+set fillchars+=diff:\ "
+
 set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
@@ -63,103 +69,8 @@ imap <c-space> <c-n>
 imap <c-@> <c-space>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-set splitbelow
-set splitright
-set fillchars+=stl:\ "╨
-set fillchars+=stlnc:─"┴
-set fillchars+=vert:│
-set fillchars+=fold:\ "
-set fillchars+=diff:\ "
 
-
-"#@#highlighting--------------------------
-colorscheme default
-set background=light
-
-
-hi MatchParen ctermbg=NONE
-hi Search ctermbg=3
-hi Comment ctermbg=NONE
-hi ColorColumn ctermbg=8
-hi Pmenu ctermbg=0
-hi VertSplit ctermbg=NONE
-hi Folded ctermbg=NONE
-hi StatusLine ctermbg=NONE
-hi StatusLineNC ctermbg=NONE
-hi StatusLineTerm ctermbg=NONE
-hi StatusLineTermNC ctermbg=NONE
-hi TabLineFill ctermbg=NONE
-hi TabLine ctermbg=NONE
-hi TabLineSel ctermbg=NONE
-hi Title ctermbg=NONE
-hi EndOfBuffer ctermbg=NONE
-hi LineNr ctermbg=NONE
-hi GitGutterAdd ctermbg=NONE
-hi GitGutterChange ctermbg=NONE
-hi GitGutterDelete ctermbg=NONE
-hi GitGutterChangeDelete ctermbg=NONE
-hi DiffAdd ctermbg=NONE
-hi DiffChange ctermbg=8
-hi DiffChange ctermfg=NONE
-hi DiffText ctermfg=NONE
-hi DiffDelete ctermfg=NONE
-hi FoldColumn ctermfg=NONE
-
-hi MatchParen ctermfg=12
-hi Search ctermfg=0
-hi Comment ctermfg=10
-hi ColorColumn ctermfg=NONE
-hi Pmenu ctermfg=7
-hi VertSplit ctermfg=8
-hi Folded ctermfg=7
-hi StatusLine ctermfg=8
-hi StatusLineNC ctermfg=8
-hi StatusLineTerm ctermfg=8
-hi StatusLineTermNC ctermfg=8
-hi TabLineFill ctermfg=8
-hi TabLine ctermfg=7
-hi TabLineSel ctermfg=7
-hi Title ctermfg=7
-hi EndOfBuffer ctermfg=0
-hi LineNr ctermfg=8
-hi GitGutterAdd ctermfg=8
-hi GitGutterChange ctermfg=8
-hi GitGutterDelete ctermfg=8
-hi GitGutterChangeDelete ctermfg=8
-hi DiffAdd ctermfg=8
-hi DiffText ctermbg=NONE
-hi DiffDelete ctermbg=NONE
-hi FoldColumn ctermbg=NONE
-
-hi MatchParen cterm=NONE
-hi Search cterm=NONE
-hi Comment cterm=NONE
-hi ColorColumn cterm=NONE
-hi Pmenu cterm=NONE
-hi VertSplit cterm=NONE
-hi Folded cterm=NONE
-hi StatusLine cterm=NONE
-hi StatusLineNC cterm=NONE
-hi StatusLineTerm cterm=NONE
-hi StatusLineTermNC cterm=NONE
-hi TabLineFill cterm=NONE
-hi TabLine cterm=NONE
-hi TabLineSel cterm=NONE
-hi Title cterm=NONE
-hi EndOfBuffer cterm=NONE
-hi LineNr cterm=NONE
-hi GitGutterAdd cterm=NONE
-hi GitGutterChange cterm=NONE
-hi GitGutterDelete cterm=NONE
-hi GitGutterChangeDelete cterm=NONE
-hi DiffAdd cterm=NONE
-hi DiffText cterm=NONE
-hi DiffDelete cterm=NONE
-hi FoldColumn cterm=NONE
-
-"#@#variables----------------------------
-
-" Dir tree width
+"@@variables----------------------------
 let g:netrw_winsize=20
 
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
@@ -187,7 +98,7 @@ let g:clang_format#style_options = {
 			\ "Standard" : "C++11"}
 
 
-"#@#mappings-----------------------------
+"@@commands-----------------------------
 
 " Close buffer but not split
 command WW bp<bar>bd #
@@ -206,6 +117,8 @@ command WS execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 command LEX Lex
 command TT TagbarToggle
 
+"@@mappings----------------------------
+
 " B for build; O for open
 autocmd FileType markdown,tex command B call Compile()
 autocmd FileType markdown,tex command O call OpenOut()
@@ -216,28 +129,13 @@ autocmd FileType c,cpp nnoremap gh :call CurtineIncSw()<CR>
 " gb -> go bib
 autocmd FileType tex nnoremap gb :vsp<space>~/Documents/LaTeX/uni.bib<CR>
 
-" And this
-inoremap <C-w> <C-\><C-o><C-w>
-
-" Remove all spaces but go into insert mode
-nnoremap J Jcl
-
-" For moving lines (^] is a special character; use <M-k> and <M-j> if it works)
+" Moving lines
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
-
-" Scroll n lines at a time
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" Open the selected text in a split (i.e. should be a file).
-map <leader>o "oyaW:sp <C-R>o<CR>
-xnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
-vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
@@ -255,59 +153,29 @@ noremap ,, :w<Home>silent <End> !urlview<CR>
 " Copy selected text to system clipboard
 vnoremap <C-c> "*Y :let @+=@*<CR>
 
-
 " Annoying without this
 nnoremap <BS> <NOP>
 
-nnoremap <F1> <NOP>
-nnoremap <F2> <NOP>
-nnoremap <F3> <NOP>
-nnoremap <F4> <NOP>
-nnoremap <F5> <NOP>
-nnoremap <F6> <NOP>
-nnoremap <F7> <NOP>
-nnoremap <F8> <NOP>
-nnoremap <F9> <NOP>
-nnoremap <F10> <NOP>
-nnoremap <F11> <NOP>
-nnoremap <F12> <NOP>
-
-inoremap <F1> <NOP>
-inoremap <F2> <NOP>
-inoremap <F3> <NOP>
-inoremap <F4> <NOP>
-inoremap <F5> <NOP>
-inoremap <F6> <NOP>
-inoremap <F7> <NOP>
-inoremap <F8> <NOP>
-inoremap <F9> <NOP>
-inoremap <F10> <NOP>
-inoremap <F11> <NOP>
-inoremap <F12> <NOP>
-
-
-" close if final buffer is netrw or the quickfix
+" Close if final buffer is netrw or the quickfix
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
 
 " Navigating with guides
 vnoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 map <leader><Tab> <Esc>/<++><Enter>"_c4l
 
-" Open filename under cursor in new tab
-nnoremap gf :vertical wincmd f<CR>
+" Open file in a split even if doesn't exist
+nnoremap gf "oyaW:vsp <C-R>o<CR>
+xnoremap gf "oy<esc>:vsp <C-R>o<CR>
+vnoremap gf "oy<esc>:vsp <C-R>o<CR>
 
 
-"#@#autocmd---------------------------
-
-""" All files
+"@@autocmd-----------------------
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-""" Select files
 autocmd FileType tex let g:compiler="pdflatex"
 autocmd FileType markdown let g:compiler="pandoc"
 autocmd FileType tex,markdown let g:compiler_outext="pdf"
@@ -318,9 +186,7 @@ autocmd VimLeave *.tex !texclear %
 autocmd FileType c,cpp ClangFormatAutoEnable
 
 
-"#@#snippets-------------------------
-
-""" LATEX
+"@@latex-------------------------
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 autocmd FileType tex inoremap ,up \usepackage{}<Esc>i
@@ -345,7 +211,7 @@ autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 
 
-""" C/C++
+"@@cpp-------------------------------
 autocmd FileType c inoremap // /*<space><space>*/<esc>2hi
 "autocmd FileType c nnoremap // <esc>I/*<esc>A*/<esc>0
 autocmd FileType c,cpp inoremap ***<CR> ******************************************************************************************<CR>
@@ -353,9 +219,14 @@ autocmd FileType c,cpp inoremap ***/ <C-\><C-o>dT*******************************
 
 
 
-"#@#functions
+"@@functions--------------------------
+function! Compile()
+	:silent! w
+	let src_f = expand('%')
+	let out_f = expand('%:r').".".g:compiler_outext
+	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+endfunction
 
-" Compilation
 function! ExitHandler(job, stat)
 	echo 'Completed '.string(a:job).' with status '.string(a:stat)
 endfunction
@@ -365,28 +236,11 @@ function! ExitHandlerReload(job, stat)
 	edit!
 endfunction
 
-
-function! Compile()
-	:silent! w
-	let src_f = expand('%')
-	let out_f = expand('%:r').".".g:compiler_outext
-	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
-endfunction
-
 function! OpenOut()
 	:silent! w
 	let src_f = expand('%')
 	let out_f = expand('%:r').".".g:compiler_outext
 	let job = job_start("open ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
-endfunction
-
-" Statusline
-function GitBranch()
-	let dir = fnamemodify(resolve(expand('%:p')),":h")
-	if dir[0:0] != "/"
-		return ""
-	endif
-	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! StatuslineGit()
@@ -402,8 +256,14 @@ function! StatuslineGit()
 	return repeat(fillchar, fillcharedges) . '< ' . b:branch . ' >' . repeat(fillchar,fillcharcount) . '< ' . expand('%f') . ' >' . repeat(fillchar, fillcharedges)
 endfunction
 
+function GitBranch()
+	let dir = fnamemodify(resolve(expand('%:p')),":h")
+	if dir[0:0] != "/"
+		return ""
+	endif
+	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
 
-" Folding
 function! MyFoldText()
 	let line = getline(v:foldstart)
 	let eline = getline(v:foldend)
@@ -425,12 +285,10 @@ function! MyFoldText()
 	let eline = substitute(eline, '\t', '', 'g')
 	let eline = substitute(eline, '^\s\{}', '', 'g')
 
-	"let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
 	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
 	return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 
-" Automatically deletes all tralling whitespace on save.
 function! <SID>StripTrailingWhitespaces()
 	let l = line(".")
 	let c = col(".")

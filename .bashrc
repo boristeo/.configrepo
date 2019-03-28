@@ -67,9 +67,9 @@ then
     if [ -f /usr/local/etc/gitconfig ];
     then
         if ps $PPID |grep mc; then
-            export PS1="\W \$(__git_ps1 '[git:%s] ')\$ "
+            export PS1="\w \$(__git_ps1 '[git:%s] ')\$ "
         else
-			export PS1="\[\033[1;36m\]\u@\h\[\033[1;00m\]:\[\033[1;34m\]\W \[\033[0;33m\]\$(__git_ps1 '\[\033[07m\]%s\[\033[0;00m\] ')\[\033[1;34m\]\$ \[\033[1;00m\]"
+			export PS1="\[\033[1;36m\]\u@\h\[\033[1;00m\]:\[\033[1;34m\]\w \[\033[0;33m\]\$(__git_ps1 '\[\033[07m\]%s\[\033[0;00m\] ')\[\033[1;34m\]\$ \[\033[1;00m\]"
         fi
     else
         brew install git
