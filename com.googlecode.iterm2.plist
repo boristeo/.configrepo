@@ -50498,7 +50498,7 @@
 	<key>DimInactiveSplitPanes</key>
 	<false/>
 	<key>DimOnlyText</key>
-	<false/>
+	<true/>
 	<key>DisableAdaptiveFrameRateInInteractiveApps</key>
 	<false/>
 	<key>DisableWindowSizeSnap</key>
@@ -50595,9 +50595,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 74 618 521 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>751 120 918 512 0 0 1680 1027 </string>
+	<string>750 440 928 394 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>548 394 1132 633 0 0 1680 1027 </string>
+	<string>840 0 840 1027 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 306 992 673 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -50642,13 +50642,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.40908597037196159</real>
+				<real>0.33914765389636159</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.728271484375</real>
+				<real>0.720489501953125</real>
 				<key>Red Component</key>
-				<real>0.47029965744762375</real>
+				<real>0.41055615818680669</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
@@ -50694,13 +50694,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.90196078431372551</real>
+				<real>0.787017822265625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.89803921568627454</real>
+				<real>0.78359600587320422</real>
 				<key>Red Component</key>
-				<real>0.0078431372549019607</real>
+				<real>0.0068436335974795615</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
@@ -50720,13 +50720,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.41960784313725491</real>
+				<real>0.22306395101864207</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.65490196078431373</real>
+				<real>0.4800262451171875</real>
 				<key>Red Component</key>
-				<real>0.49411764705882355</real>
+				<real>0.36796597775458467</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>
@@ -50737,9 +50737,9 @@
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.59999999999999998</real>
+				<real>0.7958526611328125</real>
 				<key>Red Component</key>
-				<real>0.59607843137254901</real>
+				<real>0.79065100069403171</real>
 			</dict>
 			<key>Ansi 4 Color</key>
 			<dict>
@@ -50772,13 +50772,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.7294464111328125</real>
+				<real>0.8146820068359375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.64822610865279395</real>
+				<real>0.71969938554629831</real>
 				<key>Red Component</key>
-				<real>0.35458334642970318</real>
+				<real>0.37630064436234534</real>
 			</dict>
 			<key>Ansi 7 Color</key>
 			<dict>
@@ -52888,7 +52888,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.34426582532051286</real>
+	<real>0.27694561298076925</real>
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
 	<key>TabStyleWithAutomaticOption</key>

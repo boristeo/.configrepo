@@ -14,11 +14,13 @@ alias vim=/usr/local/bin/vim
 fi
 
 if [ -x "$(command -v gls)" ]; then
-alias ls='gls --color=auto'
+alias l='gls --color=auto'
+alias ls='gls -a --color=auto'
 alias ll='gls -al --color=auto'
 else
+alias l='ls'
+alias ls='ls -a'
 alias ll='ls -al'
-alias ls='ls -G'
 fi
 
 
@@ -68,7 +70,7 @@ then
         if ps $PPID |grep mc; then
             export PS1="\w \$(__git_ps1 '[git:%s] ')\$ "
         else
-			export PS1="\[\033[0m\]\u@\h\[\033[0m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0m\]\$ \[\033[0m\]"
+			export PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0;1m\]\$ \[\033[0m\]"
         fi
     else
         brew install git
