@@ -47,8 +47,8 @@ set foldmethod=syntax
 set foldlevelstart=10
 set foldtext=MyFoldText()
 
-set laststatus=2
-set statusline=%{StatuslineGit()}
+" set laststatus=2
+" set statusline=%{StatuslineGit()}
 
 set splitbelow
 set splitright

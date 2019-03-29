@@ -1,5 +1,6 @@
 set background=light
 
+" BG
 hi MatchParen ctermbg=NONE
 hi Search ctermbg=3
 hi Comment ctermbg=NONE
@@ -28,6 +29,7 @@ hi DiffText ctermfg=NONE
 hi DiffDelete ctermfg=NONE
 hi FoldColumn ctermfg=NONE
 
+" FG
 hi MatchParen ctermfg=12
 hi Search ctermfg=0
 hi Comment ctermfg=10
@@ -54,6 +56,7 @@ hi DiffText ctermbg=NONE
 hi DiffDelete ctermbg=NONE
 hi FoldColumn ctermbg=NONE
 
+" TERM
 hi MatchParen cterm=NONE
 hi Search cterm=NONE
 hi Comment cterm=NONE

@@ -8,11 +8,10 @@ export EDITOR=vim
 export PAGER=less
 
 # Aliases
-alias xcode='open -a /Applications/Xcode.app'
-alias tmux="tmux a"
-alias mc=". /usr/local/Cellar/midnight-commander/4.8.22/libexec/mc/mc-wrapper.sh"
+if [ -x "$(command -v /usr/local/bin/vim)" ]; then
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
+fi
 
 if [ -x "$(command -v gls)" ]; then
 alias ls='gls --color=auto'
@@ -33,7 +32,7 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-export LS_COLORS="di=35:ln=36:so=34:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43:or=31;1:*.zip=31:*.gz=31:*.bz2=31"
+export LS_COLORS+=":or=31;1:*.zip=31:*.gz=31:*.bz2=31"
 
 
 # Tell grep to highlight matches
@@ -69,7 +68,7 @@ then
         if ps $PPID |grep mc; then
             export PS1="\w \$(__git_ps1 '[git:%s] ')\$ "
         else
-			export PS1="\[\033[1;36m\]\u@\h\[\033[1;00m\]:\[\033[1;34m\]\w \[\033[0;33m\]\$(__git_ps1 '\[\033[07m\]%s\[\033[0;00m\] ')\[\033[1;34m\]\$ \[\033[1;00m\]"
+			export PS1="\[\033[0m\]\u@\h\[\033[0m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0m\]\$ \[\033[0m\]"
         fi
     else
         brew install git
@@ -86,9 +85,3 @@ then
     fi
 fi
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/boristeo/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/boristeo/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/boristeo/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/boristeo/Downloads/google-cloud-sdk/completion.bash.inc'; fi
