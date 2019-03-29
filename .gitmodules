@@ -1,29 +1,18 @@
-[submodule ".vim/bundle/syntax"]
-	path = .vim/bundle/syntax
-	url = https://github.com/octol/vim-cpp-enhanced-highlight.git
-
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+[submodule ".vim/pack/bt/start/syntastic"]
+	path = .vim/pack/bt/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
-
-[submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
+[submodule ".vim/pack/bt/start/tagbar"]
+	path = .vim/pack/bt/start/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-
-[submodule ".vim/bundle/vim-gitgutter"]
-	path = .vim/bundle/vim-gitgutter
+[submodule ".vim/pack/bt/start/vim-gitgutter"]
+	path = .vim/pack/bt/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-
-[submodule ".vim/bundle/vim-multiple-cursors"]
-	path = .vim/bundle/vim-multiple-cursors
+[submodule ".vim/pack/bt/start/vim-multiple-cursors"]
+	path = .vim/pack/bt/start/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
-
-[submodule ".vim/bundle/vim-surround"]
-	path = .vim/bundle/vim-surround
+[submodule ".vim/pack/bt/start/vim-surround"]
+	path = .vim/pack/bt/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/pack/bt/start/asyncrun.vim"]
-	path = .vim/pack/bt/start/asyncrun.vim
-	url = https://github.com/skywind3000/asyncrun.vim.git
 [submodule ".vim/pack/bt/start/vim-visual-star-search"]
 	path = .vim/pack/bt/start/vim-visual-star-search
 	url = https://github.com/bronson/vim-visual-star-search.git
