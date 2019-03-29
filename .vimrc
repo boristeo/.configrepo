@@ -47,13 +47,13 @@ set foldmethod=syntax
 set foldlevelstart=10
 set foldtext=MyFoldText()
 
-" set laststatus=2
-" set statusline=%{StatuslineGit()}
+set laststatus=2
+set statusline=%{StatuslineGit()}
 
 set splitbelow
 set splitright
-set fillchars+=stl:\ "╨
-set fillchars+=stlnc:─"┴
+set fillchars+=stl:━"
+set fillchars+=stlnc:─"
 set fillchars+=vert:│
 set fillchars+=fold:\ "
 set fillchars+=diff:\ "
@@ -250,10 +250,10 @@ function! StatuslineGit()
 			let b:branch = 'local'
 		endif
 	endif
-	let fillcharedges = 3
-	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 8 - 2 * fillcharedges
+	let fillcharedges = 0
+	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 2 * fillcharedges
 	let fillchar = '─'
-	return repeat(fillchar, fillcharedges) . '< ' . b:branch . ' >' . repeat(fillchar,fillcharcount) . '< ' . expand('%f') . ' >' . repeat(fillchar, fillcharedges)
+	return repeat(fillchar, fillcharedges) . b:branch . repeat(fillchar,fillcharcount) . expand('%f') . repeat(fillchar, fillcharedges)
 endfunction
 
 function GitBranch()
