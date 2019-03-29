@@ -3,10 +3,6 @@
 .bashrc
 .bash_profile
 .inputrc
-.hushlogin
 .tmux.conf
-.bash_sessions_disable
-.chunkwmrc
-.skhdrc
 .urlview
 .scripts
