@@ -37,6 +37,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export LESSHISTFILE=-
 
 export LS_COLORS+=":or=31;1:*.zip=31:*.gz=31:*.bz2=31"
 
