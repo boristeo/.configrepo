@@ -23,7 +23,7 @@ those filenames that you want to create links to then run
 ```
 If you are running Mac OS, you can also run
 ```
-~/.configrepo/ADDITIONAL.sh
+~/.configrepo/MAC_ADDITIONS.sh
 ```
 to install helpful tools and applications that are used by the other programs
 included with this configuration.

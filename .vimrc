@@ -43,7 +43,6 @@ set nowrap
 
 set number
 set norelativenumber
-set signcolumn=no
 
 set foldmethod=syntax
 set foldlevelstart=10
@@ -87,10 +86,6 @@ let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_c_checkers=[]
 let g:syntastic_cpp_checkers=[]
-
-packadd termdebug
-let g:termdebug_wide = 176
-let termdebugger = "gdb"
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {

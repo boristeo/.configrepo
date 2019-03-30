@@ -23,6 +23,10 @@ alias ls='ls -a'
 alias ll='ls -al'
 fi
 
+# Tell grep to highlight matches
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
 
 # less/man colors
 export LESS=-R
@@ -37,53 +41,21 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LS_COLORS+=":or=31;1:*.zip=31:*.gz=31:*.bz2=31"
 
 
-# Tell grep to highlight matches
-export GREP_OPTIONS='--color=auto'
-
 # Config
 stty -ixon -ixoff
 
 
 # Sourcing additional plugins
-
-which -s brew
-if [[ $? != 0 ]];
-then
-    # Install Homebrew
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ps $PPID |grep mc; then
+	export PS1="\w \$(__git_ps1 '[git:%s] ')\$ "
+elif [ -f ~/.git-prompt.sh ]; then
+	source ~/.git-prompt.sh
+	export PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0;1m\]\$ \[\033[0m\]"
 fi
 
-which -s brew
-if [[ $? == 0 ]];
+
+if [ -f /usr/local/etc/profile.d/z.sh ];
 then
-    if [ -f /usr/local/etc/bash_completion ];
-    then
-        . /usr/local/etc/bash_completion
-        source /usr/local/etc/bash_completion.d/git-prompt.sh
-    else
-        brew install bash-completion
-        echo "Installed bash-completion. Restart terminal to see effects."
-    fi
-
-    if [ -f /usr/local/etc/gitconfig ];
-    then
-        if ps $PPID |grep mc; then
-            export PS1="\w \$(__git_ps1 '[git:%s] ')\$ "
-        else
-			export PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0;1m\]\$ \[\033[0m\]"
-        fi
-    else
-        brew install git
-        echo "Installed git."
-    fi
-
-
-    if [ -f /usr/local/etc/profile.d/z.sh ];
-    then
-        . /usr/local/etc/profile.d/z.sh
-    else
-        brew install z
-        echo "Installed z. Restart terminal to see effects."
-    fi
+	. /usr/local/etc/profile.d/z.sh
 fi
 

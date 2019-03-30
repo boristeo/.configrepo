@@ -13,9 +13,6 @@
 [submodule ".vim/pack/bt/start/vim-multiple-cursors"]
 	path = .vim/pack/bt/start/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
-[submodule ".vim/pack/bt/start/vim-gitgutter"]
-	path = .vim/pack/bt/start/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
 [submodule ".vim/pack/bt/start/tagbar"]
 	path = .vim/pack/bt/start/tagbar
 	url = https://github.com/majutsushi/tagbar.git
