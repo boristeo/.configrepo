@@ -28,6 +28,7 @@ hi DiffChange				ctermfg=NONE
 hi DiffText					ctermfg=NONE
 hi DiffDelete				ctermfg=NONE
 hi FoldColumn				ctermfg=NONE
+hi SignColumn               ctermfg=NONE
 
 "				FG
 hi MatchParen				ctermfg=12
@@ -55,6 +56,7 @@ hi DiffAdd					ctermfg=8
 hi DiffText					ctermbg=NONE
 hi DiffDelete				ctermbg=NONE
 hi FoldColumn				ctermbg=NONE
+hi SignColumn               ctermbg=NONE
 
 "				TERM
 hi MatchParen				cterm=NONE
@@ -82,3 +84,4 @@ hi DiffAdd					cterm=NONE
 hi DiffText					cterm=NONE
 hi DiffDelete				cterm=NONE
 hi FoldColumn				cterm=NONE
+hi SignColumn               cterm=NONE

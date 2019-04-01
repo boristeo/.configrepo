@@ -179,7 +179,6 @@ autocmd FileType tex,markdown let g:compiler_outext="pdf"
 autocmd FileType make set noexpandtab
 autocmd BufRead,BufNewFile *.tex,*.md,*.txt setlocal wrap linebreak
 autocmd VimLeave *.tex !texclear %
-autocmd FileType c,cpp ClangFormatAutoEnable
 
 
 "@@latex-------------------------
