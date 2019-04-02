@@ -14,6 +14,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
 set mouse=a
+set ttimeoutlen=0
 
 set autochdir
 set hidden
@@ -116,9 +117,9 @@ command TT TagbarToggle
 "@@mappings----------------------------
 
 " C for compile; O for open
-autocmd FileType markdown,tex command C call Compile()
-autocmd FileType markdown,tex command O call OpenOut()
-autocmd FileType markdown,tex command CO call Compile("OpenOut")
+autocmd FileType markdown,tex command -buffer C call Compile()
+autocmd FileType markdown,tex command -buffer O call OpenOut()
+autocmd FileType markdown,tex command -buffer CO call Compile("OpenOut")
 
 " gh -> go header
 autocmd FileType c,cpp nnoremap gh :call CurtineIncSw()<CR>
@@ -220,11 +221,11 @@ autocmd FileType tex inoremap ,it \item%<CR>
 autocmd FileType tex inoremap ,sit \subitem%<CR>
 autocmd FileType tex inoremap ,ssit \subsubitem%<CR>
 
-autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
-autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
+autocmd FileType tex inoremap ,bf \textbf{
+autocmd FileType tex inoremap ,sc \textsc{
+autocmd FileType tex inoremap ,tt \texttt{
+autocmd FileType tex inoremap ,ct \textcite{
+autocmd FileType tex inoremap ,em \emph{
 
 
 "@@cpp-------------------------------
