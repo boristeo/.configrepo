@@ -115,9 +115,10 @@ command TT TagbarToggle
 
 "@@mappings----------------------------
 
-" B for build; O for open
-autocmd FileType markdown,tex command B call Compile()
+" C for compile; O for open
+autocmd FileType markdown,tex command C call Compile()
 autocmd FileType markdown,tex command O call OpenOut()
+autocmd FileType markdown,tex command CO call Compile("OpenOut")
 
 " gh -> go header
 autocmd FileType c,cpp nnoremap gh :call CurtineIncSw()<CR>
@@ -152,6 +153,20 @@ vnoremap <C-c> "*Y :let @+=@*<CR>
 " Annoying without this
 nnoremap <BS> <NOP>
 
+inoremap <F1> <NOP>
+inoremap <F2> <NOP>
+inoremap <F3> <NOP>
+inoremap <F4> <NOP>
+inoremap <F5> <NOP>
+inoremap <F6> <NOP>
+inoremap <F7> <NOP>
+inoremap <F8> <NOP>
+inoremap <F9> <NOP>
+inoremap <F10> <NOP>
+inoremap <F11> <NOP>
+inoremap <F12> <NOP>
+
+
 " Close if final buffer is netrw or the quickfix
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
 
@@ -183,10 +198,9 @@ autocmd VimLeave *.tex !texclear %
 
 "@@latex-------------------------
 autocmd FileType tex inoremap ,doc \documentclass{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 autocmd FileType tex inoremap ,up \usepackage{}<Esc>i
 
-autocmd FileType tex inoremap ,art \documentclass{article}<Enter><Enter>\usepackage[margin=1in]{geometry}<CR>\usepackage{nth}<CR><CR>\begin{document}<CR><CR>\end{document}<UP>
+autocmd FileType tex inoremap ,art \documentclass{article}<Enter><Enter>\usepackage[margin=1in]{geometry}<CR>\usepackage{amsmath}<CR>\usepackage{amssymb}<CR>\usepackage{nth}<CR><CR>\begin{document}<CR><CR>\end{document}<UP>
 
 autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
@@ -195,11 +209,18 @@ autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}
 
 autocmd FileType tex vnoremap { <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
 
-autocmd FileType tex inoremap ,en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Esc>2k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+
+autocmd FileType tex inoremap ,fig \begin{figure}[h]<Enter>\end{figure}<Esc>kA<CR>
+
+autocmd FileType tex inoremap ,en \begin{enumerate}<Enter>\end{enumerate}<Esc>kA<CR>\item%<CR>
+autocmd FileType tex inoremap ,ul \begin{itemize}<Enter>\end{itemize}<Esc>kA<CR>\item%<CR>
+
+autocmd FileType tex inoremap ,it \item%<CR>
+autocmd FileType tex inoremap ,sit \subitem%<CR>
+autocmd FileType tex inoremap ,ssit \subsubitem%<CR>
 
 autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
 autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
 autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
@@ -215,11 +236,14 @@ autocmd FileType c,cpp inoremap ***/ <C-\><C-o>dT*******************************
 
 
 "@@functions--------------------------
-function! Compile()
+function! Compile(...)
 	:silent! w
 	let src_f = expand('%')
 	let out_f = expand('%:r').".".g:compiler_outext
-	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": get(a:, 1, "ExitHandler"), "out_cb": "OutHandler"})
+endfunction
+
+function! OutHandler(job, message)
 endfunction
 
 function! ExitHandler(job, stat)
@@ -231,7 +255,7 @@ function! ExitHandlerReload(job, stat)
 	edit!
 endfunction
 
-function! OpenOut()
+function! OpenOut(...)
 	:silent! w
 	let src_f = expand('%')
 	let out_f = expand('%:r').".".g:compiler_outext

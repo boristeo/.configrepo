@@ -50595,7 +50595,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 74 618 521 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>738 361 796 486 0 0 1920 1177 </string>
+	<string>738 453 796 486 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>548 394 1132 633 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -51330,7 +51330,7 @@
 			<key>Thin Strokes</key>
 			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.056018004441624365</real>
+			<real>0.0039439244923857864</real>
 			<key>Underline Color</key>
 			<dict>
 				<key>Alpha Component</key>
