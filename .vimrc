@@ -32,7 +32,7 @@ set belloff=all
 
 filetype plugin indent on
 syntax on
-colorscheme btcolor
+colorscheme btcolordark
 
 set backspace=indent,eol,start
 set tabstop=4
@@ -125,7 +125,7 @@ autocmd FileType markdown,tex command -buffer CO call Compile("OpenOut")
 autocmd FileType c,cpp nnoremap gh :call CurtineIncSw()<CR>
 
 " gb -> go bib
-autocmd FileType tex nnoremap gb :vsp<space>~/Documents/LaTeX/uni.bib<CR>
+autocmd FileType tex nnoremap gb :sp<space>~/Documents/LaTeX/uni.bib<CR>
 
 " Moving lines
 nnoremap <C-j> :m .+1<CR>==
@@ -176,9 +176,9 @@ vnoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 map <leader><Tab> <Esc>/<++><Enter>"_c4l
 
 " Open file in a split even if doesn't exist
-nnoremap gf "oyaW:vsp <C-R>o<CR>
-xnoremap gf "oy<esc>:vsp <C-R>o<CR>
-vnoremap gf "oy<esc>:vsp <C-R>o<CR>
+nnoremap gf "oyaW:sp <C-R>o<CR>
+xnoremap gf "oy<esc>:sp <C-R>o<CR>
+vnoremap gf "oy<esc>:sp <C-R>o<CR>
 
 
 "@@autocmd-----------------------
@@ -273,7 +273,7 @@ function! StatuslineGit()
 	let fillcharedges = 0
 	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 2 * fillcharedges
 	let fillchar = '─'
-	return repeat(fillchar, fillcharedges) . b:branch . repeat(fillchar,fillcharcount) . expand('%f') . repeat(fillchar, fillcharedges)
+	return repeat(fillchar, fillcharedges) . expand('%f') . repeat(fillchar,fillcharcount) . b:branch  . repeat(fillchar, fillcharedges)
 endfunction
 
 function GitBranch()
