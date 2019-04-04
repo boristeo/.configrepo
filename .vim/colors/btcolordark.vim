@@ -61,7 +61,7 @@ hi SignColumn               ctermbg=NONE
 "				TERM
 hi MatchParen				cterm=NONE
 hi Search					cterm=NONE
-hi Comment					cterm=NONE
+hi Comment					cterm=bold
 hi ColorColumn				cterm=NONE
 hi Pmenu					cterm=NONE
 hi VertSplit				cterm=NONE
