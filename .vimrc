@@ -21,11 +21,13 @@ set belloff=all
 
 syntax on
 
+filetype indent plugin on
 set backspace=start
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
+set smartindent
 
 set nowrap
 
@@ -72,10 +74,10 @@ let g:syntastic_cpp_checkers=[]
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
-			\ "AccessModifierOffset" : -4,
-			\ "AllowShortIfStatementsOnASingleLine" : "true",
-			\ "AlwaysBreakTemplateDeclarations" : "true",
-			\ "Standard" : "C++11"}
+      \ "AccessModifierOffset" : -4,
+      \ "AllowShortIfStatementsOnASingleLine" : "true",
+      \ "AlwaysBreakTemplateDeclarations" : "true",
+      \ "Standard" : "C++11"}
 
 
 "@@commands-----------------------------
@@ -218,77 +220,77 @@ autocmd FileType c,cpp inoremap ***/ <C-\><C-o>dT*******************************
 
 "@@functions--------------------------
 function! Compile(...)
-	:silent! w
-	let src_f = expand('%')
-	let out_f = expand('%:r').".".g:compiler_outext
-	let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": get(a:, 1, "ExitHandler"), "out_cb": "OutHandler"})
+  :silent! w
+  let src_f = expand('%')
+  let out_f = expand('%:r').".".g:compiler_outext
+  let job = job_start(g:compiler." ".src_f." -o ".out_f, {"exit_cb": get(a:, 1, "ExitHandler"), "out_cb": "OutHandler"})
 endfunction
 
 function! OutHandler(job, message)
 endfunction
 
 function! ExitHandler(job, stat)
-	echo 'Completed '.string(a:job).' with status '.string(a:stat)
+  echo 'Completed '.string(a:job).' with status '.string(a:stat)
 endfunction
 
 function! ExitHandlerReload(job, stat)
-	echo 'Completed '.string(a:job).' with status '.string(a:stat)
-	edit!
+  echo 'Completed '.string(a:job).' with status '.string(a:stat)
+  edit!
 endfunction
 
 function! OpenOut(...)
-	:silent! w
-	let src_f = expand('%')
-	let out_f = expand('%:r').".".g:compiler_outext
-	let job = job_start("open ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
+  :silent! w
+  let src_f = expand('%')
+  let out_f = expand('%:r').".".g:compiler_outext
+  let job = job_start("open ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
 endfunction
 
 function! StatuslineGit()
-	if !exists("b:branch")
-		let b:branch = GitBranch()
-		if len(b:branch) == 0
-			let b:branch = 'local'
-		endif
-	endif
+  if !exists("b:branch")
+    let b:branch = GitBranch()
+    if len(b:branch) == 0
+      let b:branch = 'local'
+    endif
+  endif
   return b:branch
 endfunction
 
 function GitBranch()
-	let dir = fnamemodify(resolve(expand('%:p')),":h")
-	if dir[0:0] != "/"
-		return ""
-	endif
-	return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  let dir = fnamemodify(resolve(expand('%:p')),":h")
+  if dir[0:0] != "/"
+    return ""
+  endif
+  return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! MyFoldText()
-	let line = getline(v:foldstart)
-	let eline = getline(v:foldend)
+  let line = getline(v:foldstart)
+  let eline = getline(v:foldend)
 
-	let nucolwidth = &fdc + &number * &numberwidth
+  let nucolwidth = &fdc + &number * &numberwidth
 
-	let linenrwidth = 0
-	let linect = line('$')
-	while linect > 0
-		let linect = linect / 10
-		let linenrwidth += 1
-	endwhile
+  let linenrwidth = 0
+  let linect = line('$')
+  while linect > 0
+    let linect = linect / 10
+    let linenrwidth += 1
+  endwhile
 
-	let windowwidth = winwidth(0) - nucolwidth - linenrwidth - 3
-	let foldedlinecount = v:foldend - v:foldstart
+  let windowwidth = winwidth(0) - nucolwidth - linenrwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-	let onetab = strpart('          ', 0, &tabstop)
-	let line = substitute(line, '\t', onetab, 'g')
-	let eline = substitute(eline, '\t', '', 'g')
-	let eline = substitute(eline, '^\s\{}', '', 'g')
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
+  let eline = substitute(eline, '\t', '', 'g')
+  let eline = substitute(eline, '^\s\{}', '', 'g')
 
-	let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
-	return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
+  let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
+  return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 
 function! <SID>StripTrailingWhitespaces()
-	let l = line(".")
-	let c = col(".")
-	%s/\s\+$//e
-	call cursor(l, c)
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfun
