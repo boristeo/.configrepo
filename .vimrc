@@ -8,36 +8,24 @@
 " Sections marked with `@@' tag
 
 "@@options----------------------
-set nocompatible
-set term=xterm-256color
-set encoding=utf-8
-set fileencoding=utf-8
-set termencoding=utf-8
-set mouse=a
 set ttimeoutlen=0
-
 set autochdir
-set hidden
-set exrc
-set secure
 set modifiable
-set autoread
-set autowrite
 
 set ignorecase
 set smartcase
 set incsearch
+set hlsearch
 
 set belloff=all
 
-filetype plugin indent on
 syntax on
-colorscheme btcolordark
 
-set backspace=indent,eol,start
-set tabstop=4
-set shiftwidth=4
+set backspace=start
+set tabstop=2
+set shiftwidth=2
 set expandtab
+set autoindent
 
 set nowrap
 
@@ -49,16 +37,9 @@ set foldlevelstart=10
 set foldtext=MyFoldText()
 
 set laststatus=2
-set statusline=%{StatuslineGit()}
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ \ \ \ %{StatuslineGit()}
 
-set splitbelow
-set splitright
-set fillchars+=stl:━"
-set fillchars+=stlnc:─"
-set fillchars+=vert:│
-set fillchars+=fold:\ "
-set fillchars+=diff:\ "
-
+set path+=**
 set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
@@ -70,6 +51,8 @@ imap <c-space> <c-n>
 imap <c-@> <c-space>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+
+nnoremap q: <NOP>
 
 "@@variables----------------------------
 let g:netrw_winsize=20
@@ -185,9 +168,6 @@ vnoremap gf "oy<esc>:sp <C-R>o<CR>
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-
 autocmd FileType tex let g:compiler="pdflatex"
 autocmd FileType markdown let g:compiler="pandoc"
 autocmd FileType tex,markdown let g:compiler_outext="pdf"
@@ -270,10 +250,7 @@ function! StatuslineGit()
 			let b:branch = 'local'
 		endif
 	endif
-	let fillcharedges = 0
-	let fillcharcount = winwidth(0) - len(b:branch) - len(expand('%f')) - 2 * fillcharedges
-	let fillchar = '─'
-	return repeat(fillchar, fillcharedges) . expand('%f') . repeat(fillchar,fillcharcount) . b:branch  . repeat(fillchar, fillcharedges)
+  return b:branch
 endfunction
 
 function GitBranch()

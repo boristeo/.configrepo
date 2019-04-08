@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
-export PATH=${PATH}:~/.scripts
+export PATH=${PATH}:~/.scripts:~/.local/bin
 
 export VISUAL=vim
 export EDITOR=vim
@@ -47,11 +47,9 @@ stty -ixon -ixoff
 
 
 # Sourcing additional plugins
-if ps $PPID |grep mc; then
-	export PS1="\W \$(__git_ps1 '[git:%s] ')\$ "
-elif [ -f ~/.git-prompt.sh ]; then
-	source ~/.git-prompt.sh
-	export PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\]:\[\033[1;36m\]\W \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0;1m\]\$ \[\033[0m\]"
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
+	export PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\]:\[\033[1;36m\]\w \$(__git_ps1 '\[\033[33;7m\]%s\[\033[0m\] ')\[\033[0;1m\]\$ \[\033[0m\]"
 fi
 
 
