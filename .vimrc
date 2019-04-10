@@ -18,6 +18,7 @@ set incsearch
 set hlsearch
 
 set belloff=all
+set mouse=a
 
 syntax on
 
@@ -31,6 +32,8 @@ set smartindent
 
 set nowrap
 
+colorscheme btcolor
+
 set number
 set norelativenumber
 
@@ -39,7 +42,7 @@ set foldlevelstart=10
 set foldtext=MyFoldText()
 
 set laststatus=2
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ \ \ \ %{StatuslineGit()}
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %-10.(%P%)\ %{StatuslineGit()}
 
 set path+=**
 set wildmode=longest,list,full
@@ -260,7 +263,7 @@ function GitBranch()
   if dir[0:0] != "/"
     return ""
   endif
-  return system("cd ".dir.";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  return system("cd \"".dir."\";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! MyFoldText()
