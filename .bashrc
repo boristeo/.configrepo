@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
-export PATH=${PATH}:~/.scripts:~/.local/bin
+export PATH=${PATH}:~/.scripts
 
 export VISUAL=vim
 export EDITOR=vim

@@ -9,7 +9,6 @@
 
 "@@options----------------------
 set ttimeoutlen=0
-set autochdir
 set modifiable
 
 set ignorecase
@@ -23,7 +22,7 @@ set mouse=a
 syntax on
 
 filetype indent plugin on
-set backspace=start
+set backspace=indent,eol,start
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -38,11 +37,19 @@ set number
 set norelativenumber
 
 set foldmethod=syntax
-set foldlevelstart=10
-set foldtext=MyFoldText()
+set nofoldenable
+set foldlevel=1
+let javaScript_fold=1
+let perl_fold=1
+let php_folding=1
+let r_syntax_folding=1
+let ruby_fold=1
+let sh_fold_enabled=1
+let vimsyn_folding='af'
+let xml_syntax_folding=1
 
 set laststatus=2
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %-10.(%P%)\ %{StatuslineGit()}
+set statusline=%<%f\ %h%m%r%=%{SyntasticStatuslineFlag()}\ \ \ \ %-14.(%l,%c%V%)\ %-10.(%P%)\ %{StatuslineGit()}
 
 set path+=**
 set wildmode=longest,list,full
@@ -65,15 +72,20 @@ let g:netrw_winsize=20
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:tex_flavor = "latex"
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_auto_jump = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_exec = 'python3'
+let g:syntastic_python_flake8_args = ['-m', 'flake8']
 let g:syntastic_c_checkers=[]
 let g:syntastic_cpp_checkers=[]
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint'
+
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
@@ -88,7 +100,7 @@ let g:clang_format#style_options = {
 " Close buffer but not split
 command WW bp<bar>bd #
 
-" Cause I apparently can't type
+" 'Cause I apparently can't type
 command Q q
 command Qa qa
 command W w
@@ -138,23 +150,6 @@ noremap ,, :w<Home>silent <End> !urlview<CR>
 
 " Copy selected text to system clipboard
 vnoremap <C-c> "*Y :let @+=@*<CR>
-
-" Annoying without this
-nnoremap <BS> <NOP>
-
-inoremap <F1> <NOP>
-inoremap <F2> <NOP>
-inoremap <F3> <NOP>
-inoremap <F4> <NOP>
-inoremap <F5> <NOP>
-inoremap <F6> <NOP>
-inoremap <F7> <NOP>
-inoremap <F8> <NOP>
-inoremap <F9> <NOP>
-inoremap <F10> <NOP>
-inoremap <F11> <NOP>
-inoremap <F12> <NOP>
-
 
 " Close if final buffer is netrw or the quickfix
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
@@ -264,31 +259,6 @@ function GitBranch()
     return ""
   endif
   return system("cd \"".dir."\";git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! MyFoldText()
-  let line = getline(v:foldstart)
-  let eline = getline(v:foldend)
-
-  let nucolwidth = &fdc + &number * &numberwidth
-
-  let linenrwidth = 0
-  let linect = line('$')
-  while linect > 0
-    let linect = linect / 10
-    let linenrwidth += 1
-  endwhile
-
-  let windowwidth = winwidth(0) - nucolwidth - linenrwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
-
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
-  let eline = substitute(eline, '\t', '', 'g')
-  let eline = substitute(eline, '^\s\{}', '', 'g')
-
-  let fillcharcount = windowwidth - len(line) - len(eline) - len(foldedlinecount)
-  return line . '...' . eline . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 
 function! <SID>StripTrailingWhitespaces()

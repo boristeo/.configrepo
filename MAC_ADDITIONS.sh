@@ -9,6 +9,7 @@ brew install tmux
 brew install coreutils
 brew install findutils
 brew install tidy-html5
+brew install eslint
 brew install urlview
 brew install bash-completion
 brew install z
