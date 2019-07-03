@@ -74,9 +74,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_auto_jump = 0
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_loc_list_height=4
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_exec = 'python3'
-let g:syntastic_python_flake8_args = ['-m', 'flake8']
+" let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checkers=[]
+" let g:syntastic_python_flake8_exec = 'python3'
+" let g:syntastic_python_flake8_args = ['-m', 'flake8']
 let g:syntastic_c_checkers=[]
 let g:syntastic_cpp_checkers=[]
 
@@ -90,21 +91,8 @@ let g:clang_format#style_options = {
 
 
 "@@commands-----------------------------
-" Close buffer but not split
-command WW bp<bar>bd #
-
-" 'Cause I apparently can't type
-command Q q
-command Qa qa
-command W w
-command Wq wq
-command Wqa wqa
-
 " Force Save
 command WS execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" Plugin toggles
-command LEX Lex
 command TT TagbarToggle
 
 "@@mappings----------------------------
@@ -139,7 +127,7 @@ autocmd FileType markdown let b:compiler="pandoc"
 autocmd FileType tex,markdown let b:compiler_outext="pdf"
 
 autocmd FileType make set noexpandtab
-autocmd BufRead,BufNewFile *.tex,*.md,*.txt setlocal wrap linebreak
+autocmd BufRead,BufNewFile *.tex,*.md,*.txt,*.html setlocal wrap linebreak
 autocmd VimLeave *.tex !texclear %
 
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
@@ -179,7 +167,7 @@ function! Compile(...)
 endfunction
 
 function! OpenOut(...)
-  let out_f = expand('%:r').".".g:compiler_outext
+  let out_f = expand('%:r').".".b:compiler_outext
   let job = job_start("open ".out_f, {"exit_cb": "ExitHandler", "out_cb": "OutHandler"})
 endfunction
 
