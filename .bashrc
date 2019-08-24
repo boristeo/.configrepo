@@ -13,15 +13,6 @@ alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 fi
 
-if [ -x "$(command -v gls)" ]; then
-alias l='gls --color=auto'
-alias ls='gls -a --color=auto'
-alias ll='gls -al --color=auto'
-else
-alias l='ls'
-alias ls='ls -a'
-alias ll='ls -al'
-fi
 
 # Tell grep to highlight matches
 alias grep="grep --color=auto"
