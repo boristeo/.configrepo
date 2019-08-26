@@ -2,4 +2,4 @@ if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
 
-alias ls='ls -G'
+alias ls='gls --color=auto'
