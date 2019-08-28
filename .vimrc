@@ -1,4 +1,4 @@
-let USE_MIN=0
+let USE_MIN=1
 syntax on
 filetype indent plugin on
 
