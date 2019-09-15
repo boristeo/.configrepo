@@ -13,8 +13,8 @@ alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 fi
 
+alias ls="ls --color=auto"
 
-# Tell grep to highlight matches
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
