@@ -13,7 +13,7 @@ alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 fi
 
-alias ls="ls --color=auto"
+alias ls="ls --color"
 
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
@@ -31,10 +31,6 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESSHISTFILE=-
 
 export LS_COLORS+=":or=31;1:*.zip=31:*.gz=31:*.bz2=31"
-
-
-# Config
-stty -ixon -ixoff
 
 
 # Sourcing additional plugins
