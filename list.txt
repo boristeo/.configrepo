@@ -2,7 +2,8 @@
 .vimrc
 .bashrc
 .bash_profile
-.inputrc
+.zshrc
+.profile
 .tmux.conf
 .scripts
 .git-prompt.sh

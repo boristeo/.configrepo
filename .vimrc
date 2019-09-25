@@ -1,6 +1,5 @@
 let USE_MIN=1
 syntax on
-filetype indent plugin on
 
 set ttimeoutlen=0
 set modifiable
@@ -13,7 +12,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
-set smartindent
 set number
 set nowrap
 set statusline=%<%f\ %y\ %h%m%r%=%-14.(%l,%c%V%)\ %-10.(%P%)\ %{GitBranch()}
@@ -41,12 +39,6 @@ else
   hi StatusLineTerm ctermfg=8
   hi StatusLineTermNC ctermfg=8
 endif
-
-autocmd BufRead,BufNewFile *.tex,*.md,*.txt,*.html setlocal wrap linebreak
-autocmd BufWritePre * %s/\s\+$//e
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
 
 function! GitBranch()
   if !exists("b:branch")

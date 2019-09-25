@@ -8,17 +8,6 @@ brew install vim
 brew install tmux
 brew install coreutils
 brew install findutils
-brew install tidy-html5
-brew install eslint
-brew install urlview
-brew install bash-completion
-brew install z
-
-brew tap koekeishiya/formulae
-brew install chunkwm
-brew install koekeishiya/formulae/skhd
-#brew services start skhd
-#brew services start chunkwm
 
 git config --global diff.tool vimdiff
 git config --global merge.tool vimdiff
