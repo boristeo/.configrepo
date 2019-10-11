@@ -9,9 +9,15 @@ export VISUAL=vim
 export EDITOR=vim
 export PAGER=less
 
+if [ -f ~/.colors.sh ]; then
+  source ~/.colors.sh
+else
+  export HI_COLOR=14
+fi
+
 if [ -x "$(command -v /usr/local/bin/vim)" ]; then
-alias vi=/usr/local/bin/vim
-alias vim=/usr/local/bin/vim
+  alias vi=/usr/local/bin/vim
+  alias vim=/usr/local/bin/vim
 fi
 
 alias ls="ls -G"
