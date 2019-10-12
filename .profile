@@ -1,4 +1,6 @@
-stty -ixon -ixoff
+if [ -t 1 ] ; then
+  stty -ixon -ixoff
+fi
 
 export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
