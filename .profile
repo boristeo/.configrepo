@@ -22,7 +22,12 @@ if [ -x "$(command -v /usr/local/bin/vim)" ]; then
   alias vim=/usr/local/bin/vim
 fi
 
-alias ls="ls -G"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias ls="ls -color=auto"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias ls="ls -G"
+fi
+
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
