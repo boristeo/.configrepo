@@ -7,7 +7,6 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set mouse=a
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -15,30 +14,12 @@ set autoindent
 set number
 set nowrap
 set statusline=%<%f\ %y\ %h%m%r%=%-14.(%l,%c%V%)\ %-10.(%P%)\ %{GitBranch()}
+set ruler
+set background=dark
+set laststatus=2
+set linebreak
 
-if USE_MIN
-  set ruler
-  set background=dark
-  hi Comment ctermfg=10
-else
-  set background=light
-  set laststatus=2
-  hi ColorColumn ctermbg=8
-  hi Pmenu ctermfg=7 ctermbg=0
-  hi Search ctermfg=0 ctermbg=3
-  hi Folded ctermfg=7 ctermbg=NONE
-  hi EndOfBuffer ctermfg=0 ctermbg=NONE
-  hi FoldColumn ctermbg=NONE
-  hi SignColumn ctermbg=NONE
-  hi MatchParen ctermfg=12
-  hi Comment ctermfg=10
-  hi LineNr ctermfg=8
-  hi VertSplit ctermfg=8
-  hi StatusLine ctermfg=8
-  hi StatusLineNC ctermfg=8
-  hi StatusLineTerm ctermfg=8
-  hi StatusLineTermNC ctermfg=8
-endif
+hi Comment ctermfg=10
 
 function! GitBranch()
   if !exists("b:branch")
