@@ -7,6 +7,9 @@ export LC_ALL="en_US.UTF-8"
 bindkey -e
 
 export PATH=${PATH}:~/.scripts
+export PATH=$PATH:"/usr/local/src/JohnTheRipper-1.9.0-Jumbo-1/run"
+alias john="/usr/local/src/JohnTheRipper-1.9.0-Jumbo-1/run/john"
+
 
 export VISUAL=vim
 export EDITOR=vim
@@ -60,3 +63,6 @@ elif test -n "$BASH_VERSION"; then
   }
   PS1='\[\033[0;1m\]\u@\h\[\033[0;1m\] \[\033[1;36m\]\w $(git_prompt)\[\033[0;1m\]\$ \[\033[0m\]'
 fi
+export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+

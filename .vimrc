@@ -1,4 +1,3 @@
-let USE_MIN=1
 syntax on
 
 set ttimeoutlen=0
@@ -19,6 +18,8 @@ set background=dark
 set laststatus=2
 set linebreak
 
+set foldmethod=manual
+
 hi Comment ctermfg=10
 
 function! GitBranch()
@@ -31,3 +32,17 @@ function! GitBranch()
   endif
   return len(b:branch) > 0 ? b:branch : "local"
 endfunction
+
+function FormatFile()
+  let fts = ['c', 'cpp']
+  if index(fts, &filetype) != -1
+    let l:lines="all"
+    silent py3f ~/.scripts/clang-format.py
+  else
+    echo "No formatting method found"
+  endif
+endfunction
+
+let g:clang_format_fallback_style='llvm'
+map <silent> <C-K> :call FormatFile()<cr>
+
