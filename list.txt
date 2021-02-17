@@ -7,4 +7,3 @@
 .tmux.conf
 .screenrc
 .scripts
-.git-prompt.sh

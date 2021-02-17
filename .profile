@@ -40,9 +40,11 @@ elif test -n "$BASH_VERSION"; then
   git_prompt() {
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*.\(\)/\1/'`
     if [ ! -z $BRANCH ]; then
-      echo -e "\033[33;7m$BRANCH\033[0m "
+      PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\] \[\033[1;36m\]\w \[\033[33;7m\]$BRANCH\[\033[0m\] \[\033[0;1m\]\$ \[\033[0m\]"
+    else
+      PS1="\[\033[0;1m\]\u@\h\[\033[0;1m\] \[\033[1;36m\]\w \[\033[0;1m\]\$ \[\033[0m\]"
     fi
   }
-  PS1='\[\033[0;1m\]\u@\h\[\033[0;1m\] \[\033[1;36m\]\w $(git_prompt)\[\033[0;1m\]\$ \[\033[0m\]'
+  PROMPT_COMMAND=git_prompt
 fi
 
