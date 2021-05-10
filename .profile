@@ -30,7 +30,7 @@ if test -n "$ZSH_VERSION"; then
   git_prompt() {
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*.\(\)/\1/'`
 
-    if [ ! -z $BRANCH ]; then
+    if [ ! -z "$BRANCH" ]; then
       echo -n " %S%F{11}$BRANCH%s"
     fi
   }
