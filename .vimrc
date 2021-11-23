@@ -43,6 +43,17 @@ function FormatFile()
   endif
 endfunction
 
+function FormatLines() range
+  let fts = ['c', 'cpp']
+  if index(fts, &filetype) != -1
+    let l:lines=a:firstline.":".a:lastline
+    silent py3f ~/.scripts/clang-format.py
+  else
+    echo "No formatting method found"
+  endif
+endfunction
+
 let g:clang_format_fallback_style='llvm'
-map <silent> <C-K> :call FormatFile()<cr>
+nmap <silent> <C-K> :call FormatFile()<cr>
+vmap <silent> <C-K> :call FormatLines()<cr>
 
