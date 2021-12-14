@@ -20,8 +20,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 
-last_c_of_hostname="${HOSTNAME: -1}"
-export HI_COLOR=`printf %d \'last_c_of_hostname`
+prefix=${HOSTNAME%?}
+last_c_of_hostname=${HOSTNAME#"$prefix"}
+export HI_COLOR=`printf '%d' "'$last_c_of_hostname"`
+export FG_COLOR="$((HI_COLOR+127))"
 
 if test -n "$ZSH_VERSION"; then
   git_prompt() {
